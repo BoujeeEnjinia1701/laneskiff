@@ -1,8 +1,10 @@
-"""LaneSkiff product appearance model (build123d), TRL 3, constructable design (LSK-DDR-002).
+"""LaneSkiff product appearance model (build123d), TRL 3, constructable design (LSK-DDR-002, LSK-DDR-003).
 
 Finished-product look for photoreal renders, built from the constructable model: every part of
 cad/src/model.py build_all() is used as it is (panels, frames, inwales, stringers, bench modules,
-bow box, strakes, skids, joint bolts, stern step, handles, pole, paddles, bow eye and line).
+bow box, stern quarter foam modules, strakes, skids, joint bolts, stern step, handles, pole, paddles,
+bow eye and line), so the renders show the light timber specification, the 60 mm wider bottom and the
+two stern quarter modules either side of the step opening (LSK-DDR-003).
 Only the look is added, as recorded in docs/REVIEW.md: painted topsides (high-visibility orange
 outside, light grey inside), a wet concrete lane slab under the boat, and a 1.75 m mannequin
 standing on the far side of the boat for scale (never between the camera and the boat). The detail
@@ -30,16 +32,16 @@ TITLE = "LaneSkiff: two-piece flood rescue skiff with a stern boarding step"
 RENDER_VIEWS = [
     {"name": "hero", "groups": ["shell", "internal", "context"], "explode": False, "el": 24, "az": -32,
      "note": "Product render from the bow and starboard side, above (about 24 deg elevation): the assembled 3.6 m skiff "
-             "on a wet lane, orange topsides, foam bench modules along both sides, stern step float lowered (kick rung "
-             "rolled up); a 1.75 m person stands on the far side of the boat for scale"},
+             "on a wet lane, orange topsides, foam bench modules along both sides and two stern quarter modules, stern "
+             "step float lowered (kick rung rolled up); a 1.75 m person stands on the far side of the boat for scale"},
     {"name": "exploded", "groups": ["shell", "internal", "rung"], "explode": True, "el": 26, "az": -40,
      "note": "Exploded view from the bow and starboard side, above (about 26 deg elevation): forward half pulled "
              "forward, stern step pulled aft, bench modules, foam, inwales, handles and gear lifted; lane and person "
              "not shown"},
     {"name": "detail", "groups": ["stern"], "explode": False, "el": 18, "az": -150,
      "note": "Detail of the stern from aft and to starboard (about 18 deg elevation): the step float on its strap "
-             "hinges behind the hinge rail, the stop straps from the transom, the kick rung below, and the two "
-             "transom grab handles"},
+             "hinges behind the hinge rail, the stop straps from the transom, the kick rung below, the two "
+             "transom grab handles, and the stern quarter foam modules either side of the step opening"},
 ]
 
 C_PAINT = "#F26B1D"      # high-visibility orange topsides and bottom
@@ -66,11 +68,11 @@ def look(name):
         return C_INSIDE, "painted", "shell", (fwd, 0, 0)
     if n.startswith(("ring frame", "inwale", "stringer", "knuckle floor", "bench rail", "bow eye pad")):
         return C_WOOD, "wood", "shell", (0, 0, 380 if n.startswith("inwale") else 150)
-    if n.startswith(("bench foam", "bench quarter foam", "bow foam", "step float foam")):
+    if n.startswith(("bench foam", "bow foam", "step float foam", "quarter foam")):
         return C_FOAM, "rubber", "internal", (0, 0, 760)
-    if n.startswith(("bench cover", "bench quarter cover")):
+    if n.startswith(("bench cover", "quarter cover")):
         return C_COVER, "fabric", "shell", (0, 0, 560)
-    if n.startswith(("bench straps", "bench quarter straps", "stop straps", "kick rung straps")):
+    if n.startswith(("bench straps", "quarter strap", "stop straps", "kick rung straps")):
         return C_STRAP, "fabric", "shell", (0, 0, 620)
     if n.startswith(("rub strake", "skid")):
         return C_HDPE, "plastic", "shell", (0, 0, -480 if n.startswith("skid") else 260)

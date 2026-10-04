@@ -3,7 +3,7 @@ doc_id: LSK-PRB-001
 title: LaneSkiff problem statement
 project: LaneSkiff
 doc_type: Problem statement
-version: "0.2"
+version: "0.3"
 status: Draft
 date: '2026-10-03'
 author: Amish Chadha
@@ -17,6 +17,10 @@ revisions:
   date: '2026-10-03'
   author: Amish Chadha
   change: Budget stated as a value-engineering target; open questions answered at TRL 3; first co-design candidates; safety section
+- version: "0.3"
+  date: '2026-10-03'
+  author: Amish Chadha
+  change: Open question answers updated for Amish's decisions of 2026-10-03 (LSK-DDR-003)
 ---
 
 # LaneSkiff problem statement
@@ -90,8 +94,8 @@ The TRL 1 questions are answered on paper at TRL 3 (LSK-CAL-001, LSK-DDR-001); t
 
 - **Best build material for Kerala and Bihar?** Plywood and epoxy, stitch and glue, for the first prototype: the most widely available skills and materials, and repairable. Aluminium and HDPE paths come out at similar mass (LSK-CAL-001, section 8).
 - **Step depth and folding for children and older adults?** A float that lies on the water behind the transom, with a kick rung 270 mm below it, and two transom handles; a person steps on the rung, kneels on the float and rolls over the transom. The float folds up against the transom for carrying.
-- **Level swamped flotation inside the weight budget?** Level flotation works with 0.49 m3 of foam (15 kg) placed outboard and forward, but the hull comes out at 100 kg against the 50 kg target. The options are with Amish (`docs/REVIEW.md`).
-- **Is the fin drive worth it?** Not in the first prototype design; the options are with Amish.
+- **Level swamped flotation inside the weight budget?** Level flotation works with 0.59 m3 of foam (18 kg) placed outboard, forward and in the stern quarters, but the hull comes out at 87.9 kg in the light timber specification against the 50 kg target; Amish accepted this on 2026-10-03 (LSK-DDR-003).
+- **Is the fin drive worth it?** Not in the first prototype: Amish decided on 2026-10-03 to leave it out (LSK-DDR-003); an open fixed forward-only drive stays a later idea for the portfolio.
 - **Which partner hosts the first trials?** The first candidates above, to approach.
 
 > **Safety:** Flood water is dangerous even when it looks calm: submerged walls, open drains and manholes, live electrical wires, debris and contaminated water. LaneSkiff is not for swiftwater, surf, open water or water flowing faster than a person can wade against. Crew and passengers wear life jackets at all times, crews follow their own agency's water rescue training, and the boat is an open engineering reference, not certified rescue equipment.

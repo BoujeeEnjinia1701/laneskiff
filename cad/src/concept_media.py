@@ -1,4 +1,4 @@
-"""LaneSkiff concept media (TRL 3, constructable design of LSK-DDR-002), generated from the model.
+"""LaneSkiff concept media (TRL 3, constructable design of LSK-DDR-002 and LSK-DDR-003), generated from the model.
 
 Run from the repo root:  python cad/src/concept_media.py
 Takes every part of cad/src/model.py and renders the media set with .kit/concept.py:
@@ -37,9 +37,9 @@ GROUPS = [
     ("Inwales", 7, "#8B5A2B", ("inwale",), (0, 0, 380)),
     ("Stringers and knuckle floor", 8, "#6F4521", ("stringer", "knuckle floor"), (0, 0, 120)),
     ("Bench modules: rails, covers, straps", 9, "#EA580C", ("bench rail", "bench cover", "bench straps"), (0, 0, 560)),
-    ("Stern quarter foam modules", 29, "#F59E0B", ("bench quarter",), (0, 0, 560)),
     ("Bow box wall and deck", 9, "#D9B98C", ("bow box wall", "bow deck"), (0, 0, 560)),
     ("Buoyancy foam", 10, "#FACC15", ("bench foam", "bow foam", "step float foam"), (0, 0, 760)),
+    ("Stern quarter foam modules", 29, "#F97316", ("quarter cover", "quarter foam", "quarter strap"), (0, 0, 820)),
     ("Joint bolts and nut plates", 11, "#374151", ("joint bolt", "alignment pin"), (0, 0, 0)),
     ("Rub strakes", 12, "#1F2937", ("rub strake",), (0, 0, 260)),
     ("Bottom skids", 13, "#111827", ("skid",), (0, 0, -480)),
@@ -112,11 +112,11 @@ def main():
     render_all(
         parts, project=PROJECT, title=f"{TITLE} concept", dwg_no="LSK-DWG-010",
         key_figures=[
-            f"Hull 3.6 m long, {2 * M.half(P['D'], -P['strake'][0], P) / 1000:.2f} m beam over the rub strakes, 0.40 m deep; two halves of 1.8 m",
-            f"Hull {float(r('M1')):.0f} kg (halves {float(r('M2')):.0f} and {float(r('M3')):.0f} kg); okoume plywood and epoxy",
-            f"Rated load five persons, 375 kg; deepest draft {max(int(v) for v in r('H2').split('; ')[1:])} mm",
+            "Hull 3.6 m long, 1.20 m beam over the rub strakes, 0.40 m deep; two halves of 1.8 m",
+            f"Hull {float(r('M1')):.0f} kg (halves {float(r('M2')):.0f} and {float(r('M3')):.0f} kg); okoume and epoxy",
+            f"Rated load five persons, 375 kg; deepest draft {max(float(v) for v in r('H2').split('; ')[1:]):.0f} mm",
             f"Stern-step boarding heel {float(r('B1')):.1f} deg; over the side {float(r('B3')):.1f} deg",
-            f"Swamped with rated persons: afloat, {r('F5').split('; ')[0]} mm freeboard at the transom; stern quarter foam",
+            f"Swamped with rated persons: afloat, {r('F5').split('; ')[0]} mm freeboard at the transom (30 L stern foam)",
             f"Halves join with eight M10 bolts and one spanner in about {float(r('T1')):.0f} min (estimate)",
         ],
         scale_figure=True, web_model=False, cut=False,
@@ -129,7 +129,8 @@ def main():
               size=(10, 7.5), title=f"{PROJECT}: cutaway across the aft half",
               note="Cut across the boat 1.0 m forward of the transom, seen from aft and slightly to starboard, 14 deg "
                    "elevation. The foam bench modules sit outboard against the sides, under the inwales, so a swamped "
-                   "boat floats level; the floor between them is clear for people")
+                   "boat floats level; the floor between them is clear for people. The two stern quarter modules "
+                   "stand either side of the step opening, aft of the cut")
     web(media_parts(M.build_all(P)))
     for d in ("_views", "_views_fig"):
         shutil.rmtree(ROOT / "media" / d, ignore_errors=True)

@@ -35,15 +35,18 @@ def main():
     asm = M.flat([s for *_, s in rows])
     views = project_views(asm, work)
     slab = M.box(SEC_X - 60, SEC_X, -900, 900, -50, 600)
-    sec = M.flat([s & slab for n, h, b, s in rows if h in (M.AFT, "outfit") and (s & slab).volume > 1])
+    def cut(s):
+        r = s & slab
+        return r if r is not None and r.volume > 1 else None
+    sec = M.flat([c for c in (cut(s) for n, h, b, s in rows if h in (M.AFT, "outfit")) if c is not None])
     sv = project_views(sec, work / "sec")
     sb = sec.bounding_box()
     s = Sheet(project="LaneSkiff", title="Two-piece flood rescue skiff: general arrangement",
               dwg_no="LSK-DWG-001", rev="P3", author="Amish Chadha", date=DATE,
-              material="Okoume plywood and epoxy path, softwood framing; parts per bom/bom.csv. PRELIMINARY, NOT FOR FABRICATION",
+              material="Okoume plywood, softwood framing and epoxy; parts per bom/bom.csv. PRELIMINARY, NOT FOR FABRICATION",
               revisions=[("P1", "Preliminary GA for TRL 3 (from cad/src/model.py)", DATE, "AC"),
                          ("P2", "LSK-DDR-002: design for construction", DATE, "AC"),
-                         ("P3", "LSK-DDR-003: light specification, bottom 60 wider, quarter foam, 5 persons", DATE, "AC")])
+                         ("P3", "LSK-DDR-003: light timber, bottom 60 wider, 4 mm sides, stern quarter foam", DATE, "AC")])
     s.add_ortho(views)
     vw = (sb.max.Y - sb.min.Y) * SEC_K
     vh = (sb.max.Z - sb.min.Z) * SEC_K
@@ -66,16 +69,17 @@ def main():
     L += leader(X(P["stringer_y"]), Z(-4), tx, y0 + 32, "SKID (13)")
     L += leader(X(0), Z(3), tx, y0 + 38, "BOTTOM 6 PLY (1)")
     s._layers += L
+    bb = asm.bounding_box()
     s.add_notes("Main sizes and figures (mm unless stated)", [
-        f"Length 3,600 in two halves of 1,800; beam over strakes {2 * M.half(P['D'], -P['strake'][0], P):,.0f}",
+        f"Length 3,600 in two halves of 1,800; beam overall {bb.max.Y - bb.min.Y:,.0f}",
         f"Depth 400; bottom {2 * P['half_bot']:,.0f} wide at the chine; sides flared 8 deg",
         "Bottom flat to 2,700 from the transom, raked to 200 at the bow",
         "Each half closed by its own bulkhead; joint: 8 M10 x 80 bolts",
         "Bench modules 330 from the centreline to the side, top 360",
         "Stern step float 450 x 600 x 90, hinged 40 behind the rail",
         "Kick rung 270 below the float; stop straps at 20 deg down",
+        "Stern quarter foam 2 x 15 L, 250 clear way between (29)",
         "Rated load 5 persons (375 kg); see LSK-CAL-001 for drafts",
-        "Stern quarter foam modules 2 x 15 L; capacity plate on transom",
         "Third-angle; X from transom, Y to port; (n) = BOM line",
     ], x=276, y=118, width=146)
     out = s.save(ROOT / "cad" / "drawings" / "LSK-DWG-001")
