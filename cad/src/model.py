@@ -1,4 +1,7 @@
-"""LaneSkiff parametric model (build123d), TRL 3, constructable design (LSK-DDR-002).
+"""LaneSkiff parametric model (build123d), TRL 3, constructable design (LSK-DDR-002) with the round 2
+requirement decisions of LSK-DDR-003 (Amish, 2026-10-03): light timber specification (okoume plywood,
+4 mm sides, softwood framing, no glass inside the floor), bottom 60 mm wider (1,060 mm at the chine),
+rated load five persons, and two 15 L covered foam modules in the stern quarters.
 
 Run from the repo root:  python cad/src/model.py [--check] [--export]
   --check   run the constructability checks (overlaps, contacts, bolt paths, step swing, beam)
@@ -11,15 +14,15 @@ through hardwood ring frames on the two joint bulkheads (eight M10 bolts into te
 
 Coordinates in mm. X along the boat from the outer face of the stern transom (x = 0) to the bow
 (x = 3,600); Y across, port side positive; Z up from the outside of the bottom (z = 0). Hull sides
-are flat panels flared outward by 8 deg. The bottom is flat to the knuckle at x = 2,700 and rakes
+are flat panels flared outward by 8 deg; the bottom is 1,060 mm wide at the chine (LSK-DDR-003). The bottom is flat to the knuckle at x = 2,700 and rakes
 up to 200 mm at the bow.
 
 Components (BOM line numbers in brackets, see bom/bom.csv):
-  [1]  bottom panels, 6 mm plywood (aft, forward flat, bow rake)
-  [2]  side panels, 6 mm plywood (4)
+  [1]  bottom panels, 6 mm okoume plywood (aft, forward flat, bow rake)
+  [2]  side panels, 4 mm okoume plywood (4)
   [3]  stern transom, 9 mm plywood        [4]  bow transom, 9 mm plywood
-  [5]  joint bulkheads, 6 mm plywood (2)  [6]  ring frames, hardwood 20 x 45 (transom, two joint frames)
-  [7]  inwales, hardwood 20 x 40 (4)      [8]  bottom stringers, hardwood 40 x 20 (6), knuckle floor
+  [5]  joint bulkheads, 6 mm plywood (2)  [6]  ring frames, softwood 20 x 45 (transom, two joint frames)
+  [7]  inwales, softwood 20 x 40 (4)      [8]  bottom stringers, softwood 40 x 20 (6), knuckle floor
   [9]  bench modules: hardwood bench rails, tarpaulin covers, webbing straps; bow box wall and deck, 6 mm plywood
   [10] buoyancy foam, closed-cell polyethylene (LevelHull layout: outboard benches and bow box)
   [11] joint bolts M10 x 80 into welded nut plates (8), alignment pins (2)
@@ -29,6 +32,8 @@ Components (BOM line numbers in brackets, see bom/bom.csv):
   [17] transom grab handles (2)           [18] carry handles (8)
   [19] push pole, two 1.5 m sections      [20] paddles (2)
   [21] bow eye, backing pad and bow line
+  [29] stern quarter foam modules (2): covers and straps; their foam cores are on line [10] (LSK-DDR-003)
+  [30] capacity plate (text only, not modelled)
 CONCEPT, NOT FOR FABRICATION.
 """
 import math
@@ -46,9 +51,9 @@ PARAMS = {
     "knuckle": 2700.0,      # bottom knuckle, start of the bow rake
     "rise": 200.0,          # bottom height at the bow
     "D": 400.0,             # side height (sheer), constant
-    "half_bot": 500.0,      # outer half width of the bottom at the chine
+    "half_bot": 530.0,      # outer half width of the bottom at the chine (500 until LSK-DDR-003: 60 mm wider)
     "flare_deg": 8.0,       # side flare from vertical
-    "t_bot": 6.0, "t_side": 6.0, "t_transom": 9.0, "t_bow": 9.0, "t_bh": 6.0,
+    "t_bot": 6.0, "t_side": 4.0, "t_transom": 9.0, "t_bow": 9.0, "t_bh": 6.0,
     "cover_t": 2.0, "t_box": 6.0,
     "bench_rail": (40.0, 20.0),   # hardwood rail on the floor along the inboard foot of each bench module
     "strap": (50.0, 2.5), "straps_aft": 3, "straps_fwd": 2,
@@ -61,6 +66,9 @@ PARAMS = {
     "bench_top": 360.0,         # bench top, level with the underside of the inwale
     "bench_fwd_end": 2680.0,    # forward bench boxes stop at the knuckle floor
     "bow_box_x": 3000.0,        # aft face of the bow box wall
+    # stern quarter foam modules (LSK-DDR-003, R5): envelope x from the transom, inboard face y, z from the
+    # stringer top to the bench top; 15 L foam core each inside a 2 mm cover; aft end clear of the rail bolt nuts
+    "quarter": (40.0, 249.0, 104.0, 26.0, 360.0), "quarter_straps": 2,
     "strake": (12.0, 30.0),     # HDPE rub strake: thickness, height
     "skid": (40.0, 8.0),        # HDPE skid: width, thickness
     "joint_bolts": [(-250.0, "b"), (-75.0, "b"), (75.0, "b"), (250.0, "b"),
@@ -265,6 +273,27 @@ def hull_parts(p=PARAMS):
             add(f"bench cover {tag} {side}", half_, 9, f(env - core))
             add(f"bench foam {tag} {side}", half_, 10, f(core))
             add(f"bench straps {tag} {side}", half_, 9, f(strap))
+    # stern quarter foam modules (LSK-DDR-003): one each side, inboard of the aft bench module against its face,
+    # standing on the side stringer and the bench rail; held down by two webbing straps each, screwed to the floor
+    # at the inboard foot and running over the module and the bench top to the inwale like the bench straps
+    qx0, qx1, qy, qz0, qz1 = p["quarter"]
+    q_env = box(qx0, qx1, qy, by, qz0, qz1)
+    q_core = box(qx0 + ct, qx1 - ct, qy + ct, by - ct, qz0 + ct, qz1 - ct)
+    q_straps = []
+    nq = p["quarter_straps"]
+    for k in range(nq):
+        xs = qx0 + (qx1 - qx0) * (k + 1) / (nq + 1)
+        a, b = xs - sw_ / 2, xs + sw_ / 2
+        yi = half(bt + st_, ts + iw, p)
+        q_straps += [yz_x([(qy - st_, bt), (half(bt, ts + iw, p), bt), (yi, bt + st_), (qy - st_, bt + st_)], a, b),
+                     box(a, b, qy - st_, qy, tb, bt), box(a, b, qy, qy + 20, tb, tb + st_)]
+    q_strap = q_straps[0]
+    for q in q_straps[1:]:
+        q_strap = q_strap.fuse(q)
+    for side, f in (("port", lambda s_: s_), ("starboard", mirror_y)):
+        add(f"bench quarter cover {side}", AFT, 29, f(q_env - q_core))
+        add(f"bench quarter foam {side}", AFT, 10, f(q_core))
+        add(f"bench quarter straps {side}", AFT, 29, f(q_strap))
     # bow box: aft wall and deck (6 mm plywood) closing the foam block under the bow deck
     tbx = p["t_box"]
     bx = p["bow_box_x"]
@@ -454,13 +483,13 @@ def outfit_parts(p=PARAMS):
 
 
 BOM_NAMES = {  # noqa: E501
-    1: "Bottom panels, 6 mm plywood", 2: "Side panels, 6 mm plywood", 3: "Stern transom, 12 mm plywood",
+    1: "Bottom panels, 6 mm okoume plywood", 2: "Side panels, 4 mm okoume plywood", 3: "Stern transom, 12 mm plywood",
     4: "Bow transom, 9 mm plywood", 5: "Joint bulkheads, 9 mm plywood", 6: "Ring frames, hardwood 20 x 45",
     7: "Inwales, hardwood 20 x 40", 8: "Stringers and knuckle floor, hardwood", 9: "Bench modules and bow box",
     10: "Buoyancy foam, closed-cell PE", 11: "Joint bolts M10 and alignment pins", 12: "Rub strakes, HDPE",
     13: "Bottom skids, HDPE", 14: "Stern step: rail, float and hinges", 15: "Step stop straps and pad eyes",
     16: "Kick rung on straps", 17: "Transom grab handles", 18: "Carry handles", 19: "Push pole, two sections",
-    20: "Paddles", 21: "Bow eye and bow line",
+    20: "Paddles", 21: "Bow eye and bow line", 29: "Stern quarter foam modules: covers and straps",
 }
 
 
@@ -550,6 +579,10 @@ def checks(p=PARAMS):
         ("bench rail aft port", "bench cover aft port"), ("bench straps aft port", "bench rail aft port"),
         ("bench straps aft port", "inwale aft port"), ("bench straps forward starboard", "bench cover forward starboard"),
         ("bench foam aft port", "bench cover aft port"), ("bench cover forward starboard", "side forward starboard"),
+        ("bench quarter cover port", "stringer aft port"), ("bench quarter cover port", "bench rail aft port"),
+        ("bench quarter cover port", "bench cover aft port"), ("bench quarter foam starboard", "bench quarter cover starboard"),
+        ("bench quarter straps port", "bottom aft"), ("bench quarter straps port", "inwale aft port"),
+        ("bench quarter straps starboard", "bench quarter cover starboard"),
         ("bow box wall", "bottom bow rake"), ("bow deck", "inwale forward port"), ("bow deck", "bow transom"),
         ("bow foam", "bow deck"), ("bow eye pad", "bow transom"),
         ("rub strake aft port", "side aft port"), ("rub strake forward starboard", "side forward starboard"),

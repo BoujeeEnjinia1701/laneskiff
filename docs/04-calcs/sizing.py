@@ -17,6 +17,9 @@ Method in brief:
              people count at two thirds of their weight (conservative design assumption);
   structure  one-way plate bending of the floor, joint bolt tension in a kerb-hogging case, and
              the stop strap pull with a person on the step.
+Round 2 requirement decisions (LSK-DDR-003, Amish, 2026-10-03): light timber specification (okoume plywood,
+4 mm sides, softwood framing, no glass inside the floor), bottom 60 mm wider, five-person rating (375 kg), two
+15 L stern quarter foam modules and the operating rule that the aft crew member moves amidships when swamped.
 Screening estimates for a paper proof of concept; not a substitute for the TRL 4 tests.
 Software license MIT, see LICENSE-SOFTWARE.
 """
@@ -35,26 +38,27 @@ OUT = []
 
 A = {
     "rho_w": 1000.0,          # fresh floodwater, kg/m3
-    "rho_ply": 600.0,         # marine plywood (BS 1088 okoume 450 to gurjan 700); conservative middle
-    "rho_hw": 700.0,          # durable hardwood (teak, jackwood, or similar local timber)
+    "rho_ply": 450.0,         # okoume marine plywood (BS 1088), light specification of LSK-DDR-003 (600 before)
+    "rho_hw": 700.0,          # durable hardwood (teak, jackwood, or similar local timber): rail, block, rim, rung, pad
+    "rho_sw": 500.0,          # softwood framing (ring frames, inwales, stringers, bench rails, knuckle floor), LSK-DDR-003
     "rho_foam": 30.0,         # closed-cell polyethylene foam
     "rho_hdpe": 950.0,
     "rho_steel": 7900.0,
     "rho_fabric": 325.0,      # model density giving 0.65 kg/m2 tarpaulin at 2 mm and 40 g/m webbing at 50 x 2.5 mm
     "glass_out": 0.80,        # kg/m2: 400 g/m2 glass cloth plus resin on the outside of the bottom and sides
-    "glass_in": 0.40,         # kg/m2: 200 g/m2 glass on the inside of the floor panels
+    "glass_in": 0.0,          # kg/m2: no glass inside the floor (LSK-DDR-003; 0.40 before)
     "coat": 0.20,             # kg/m2 per face, two coats of epoxy on every other plywood face
     "tape": 0.25,             # kg/m of seam: 100 mm glass tape inside and out, with the fillet
     "fixings": 1.5,           # kg: screws, washers and sealant not modelled
     "person": 75.0,           # kg, design person
     "boarder": 80.0,          # kg, R6 boarder
-    "persons": 6,             # rated: a crew of two and four adults
+    "persons": 5,             # rated: a crew of two and three adults (LSK-DDR-003; six before)
     "swamp_person": 2.0 / 3.0,  # share of a person's weight carried by the swamped boat
     "ply_allow": 40.0,        # MPa, bending strength of marine plywood along the face grain (sheath ignored)
     "foot_kN": 1.2,           # kN, 80 kg with a 1.5 dynamic factor on one foot
     "foot_w": 300.0,          # mm, width of floor strip that carries the foot load
     "bolt_proof_kN": 29.0,    # M10 stainless A4-70 at 70 % of 0.2 % proof (58 mm2 x 450 MPa x 1.1)
-    "plate_bear_kN": 16.0,    # 40 x 40 mm nut plate on hardwood at 10 MPa
+    "plate_bear_kN": 9.6,     # 40 x 40 mm nut plate on softwood at 6 MPa (estimate; 16 kN on hardwood at 10 MPa before)
     "webbing_kN": 8.0,        # 25 mm polyester webbing, breaking strength (to confirm)
     "hinge_kN": 4.0,          # heavy stainless strap hinge pin shear, each (to confirm)
 }
@@ -90,12 +94,13 @@ HALF = {n: h for n, h, _, _ in ROWS}
 
 MAT = {}
 for n, h, b, s in ROWS:
-    if n.startswith(("bench cover", "bench straps")):
+    if n.startswith(("bench cover", "bench straps", "bench quarter cover", "bench quarter straps")):
         MAT[n] = "fabric"
     elif b in (1, 2, 3, 4, 5) or n in ("bow box wall", "bow deck", "step float top deck", "step float bottom deck"):
         MAT[n] = "ply"
-    elif b in (6, 7, 8) or n.startswith("bench rail") or n in ("bow eye pad", "hinge rail", "transom backing block",
-                                                                 "step float rim", "kick rung"):
+    elif b in (6, 7, 8) or n.startswith("bench rail"):
+        MAT[n] = "sw"
+    elif n in ("bow eye pad", "hinge rail", "transom backing block", "step float rim", "kick rung"):
         MAT[n] = "hw"
     elif b == 10:
         MAT[n] = "foam"
@@ -105,7 +110,7 @@ for n, h, b, s in ROWS:
         MAT[n] = "steel"
     else:
         MAT[n] = "bought"
-RHO = {"ply": A["rho_ply"], "hw": A["rho_hw"], "foam": A["rho_foam"], "hdpe": A["rho_hdpe"], "steel": A["rho_steel"],
+RHO = {"ply": A["rho_ply"], "hw": A["rho_hw"], "sw": A["rho_sw"], "foam": A["rho_foam"], "hdpe": A["rho_hdpe"], "steel": A["rho_steel"],
        "fabric": A["rho_fabric"]}
 
 # bought items at catalogue-type masses (kg), not from model volume
@@ -237,15 +242,15 @@ def combine(items):
 
 
 # ------------------------------------------------------------------ 3 swamped
-WOODY = [n for n in NAMED if MAT[n] in ("ply", "hw", "hdpe")]
+WOODY = [n for n in NAMED if MAT[n] in ("ply", "hw", "sw", "hdpe")]
 FOAM = [n for n in NAMED if MAT[n] == "foam" and not n.startswith("step")]
 LEVELS = [10.0 * i for i in range(0, 41)]
 
 
-def tabulate():
+def tabulate(foam_names=None):
     """Foam submerged volume and centroid, and timber and HDPE mass above water, at 10 mm levels."""
     tab = []
-    foam = Compound([NAMED[n] for n in FOAM])
+    foam = Compound([NAMED[n] for n in (foam_names or FOAM)])
     for z in LEVELS:
         f = cut_below(foam, z)
         fv = vol(f)
@@ -271,10 +276,10 @@ def interp(tab, z, key):
     return tab[-1][key]
 
 
-def foam_waterplane(z):
+def foam_waterplane(z, foam_names=None):
     """Area, centroid x and second moments of the foam cut by the water surface at z."""
     pieces = []
-    for n in FOAM:
+    for n in (foam_names or FOAM):
         s = NAMED[n] & M.box(-800, 4400, -900, 900, z - 0.5, z + 0.5)
         if vol(s) > 0:
             bb = s.bounding_box()
@@ -295,7 +300,9 @@ def main():
         round(hull, 1), "kg", "R1", "Not met")
     out("M2", "Aft half mass, with the stern step", round(m["by_half"]["aft"], 1), "kg", "R1", "Not met")
     out("M3", "Forward half mass", round(m["by_half"]["fwd"], 1), "kg", "R1", "Not met")
-    for k, label in (("ply", "plywood"), ("hw", "hardwood"), ("foam", "foam"), ("hdpe", "HDPE strakes and skids"),
+    out("M9", "Carried by two per half with the shoulder slings: each carrier, aft half; forward half",
+        f"{m['by_half']['aft'] / 2:.1f}; {m['by_half']['fwd'] / 2:.1f}", "kg")
+    for k, label in (("ply", "okoume plywood"), ("hw", "hardwood"), ("sw", "softwood framing"), ("foam", "foam"), ("hdpe", "HDPE strakes and skids"),
                      ("steel", "bolts and bow eye"), ("fabric", "bench covers and straps"), ("bought", "bought fittings")):
         out(f"M4{k}", f"Mass of {label}", round(m["by_mat"].get(k, 0.0), 1), "kg")
     out("M5", "Glass, epoxy, coating, tapes and small fixings", round(m["glass_epoxy"], 1), "kg")
@@ -307,14 +314,15 @@ def main():
     hb = (hull, m["lcg"], 0.0, m["kg"])
     gear = (m["loose"], 700.0, 0.0, 60.0)
     p_ = A["person"]
-    rated = [
+    six = [
         (p_, 400.0, 0.0, 1006.0),          # crew 1 standing aft, poling
         (p_, 2900.0, 0.0, 500.0),          # crew 2 kneeling forward
         (p_, 1000.0, 440.0, 580.0), (p_, 1000.0, -440.0, 580.0),   # seated on the aft benches
         (p_, 2200.0, 440.0, 580.0), (p_, 2200.0, -440.0, 580.0),   # seated on the forward benches
     ]
+    rated = six[:A["persons"]]             # five persons (LSK-DDR-003): one forward bench seat left empty
     rated_kg = sum(q[0] for q in rated)
-    out("L1", "Rated load: a crew of two and four adults at 75 kg", round(rated_kg), "kg")
+    out("L1", "Rated load: a crew of two and three adults at 75 kg (five persons)", round(rated_kg), "kg")
     out("L2", "Rated load over hull mass", round(rated_kg / hull, 2), "", "R2",
         "Met" if rated_kg / hull >= 6 else "Not met")
     W, lcg, _, kg = combine([hb, gear] + rated)
@@ -357,8 +365,7 @@ def main():
     # swamped (R5)
     tab = tabulate()
     foam_tot = sum(vol(NAMED[n]) for n in FOAM) * 1e-9
-    out("F1", "Buoyancy foam in the hull (benches and bow box)", round(foam_tot, 3), "m3")
-    sw_persons = [(q[0] * A["swamp_person"], q[1], q[2], q[3]) for q in rated]
+    out("F1", "Buoyancy foam in the hull (benches, stern quarter modules and bow box)", round(foam_tot, 3), "m3")
     steel = sum(part_mass(n) for n in NAMED if MAT[n] == "steel") * (1 - A["rho_w"] / A["rho_steel"])
     bought = sum(BOUGHT[n] for n in BOUGHT if n not in LOOSE) * 0.6
     foam_mass = sum(part_mass(n) for n in FOAM) + part_mass("step float foam")
@@ -366,45 +373,64 @@ def main():
     fixed = m["glass_epoxy"] + steel + bought + foam_mass + fabric + m["loose"] * 0.5
     stepw = sum(part_mass(n) for n in NAMED if HALF[n] == "step" and MAT[n] in ("ply", "hw")) * 0.0
 
-    def weight(z):
-        return fixed + interp(tab, z, "wm") + sum(q[0] for q in sw_persons) + stepw
+    def swamped(persons, foam_names):
+        """Swamped equilibrium with persons (at two thirds) and the foam bodies named."""
+        tb_ = tab if foam_names is FOAM else tabulate(foam_names)
+        sw = [(q[0] * A["swamp_person"], q[1], q[2], q[3]) for q in persons]
 
-    def lift(z):
-        return interp(tab, z, "fv") * A["rho_w"]
+        def weight(z):
+            return fixed + interp(tb_, z, "wm") + sum(q[0] for q in sw) + stepw
 
-    lo, hi = 0.0, 400.0
-    for _ in range(50):
-        z = (lo + hi) / 2
-        if lift(z) > weight(z):
-            hi = z
-        else:
-            lo = z
-    zw = (lo + hi) / 2
-    Wsw = weight(zw)
-    out("F2", "Swamped, rated persons aboard: water level inside and out, above the outside of the bottom", round(zw), "mm")
-    out("F3", "Swamped: weight carried by the foam (persons at two thirds)", round(Wsw), "kg")
-    Aw, xc, IT, IL = foam_waterplane(zw)
-    fx = interp(tab, zw, "fx")
-    fz = interp(tab, zw, "fz")
-    wm = interp(tab, zw, "wm")
-    items = [(fixed, 1700.0, 0, 150.0), (wm, interp(tab, zw, "wx"), 0, interp(tab, zw, "wz"))] + sw_persons
-    Wt, lx, _, kz = combine(items)
-    V = Wt / A["rho_w"]
-    GML = fz / 1000 + IL / V - kz / 1000
-    GMT = fz / 1000 + IT / V - kz / 1000
-    trim = math.degrees((fx - lx) / 1000 / GML)
-    xa, xf = 0.0, P["L"]
-    fb_aft = P["D"] - (zw + math.radians(trim) * (xc * 1000 - xa))
-    fb_fwd = P["D"] - (zw - math.radians(trim) * (xf - xc * 1000))
-    out("F4", "Swamped trim (+ = stern down)", round(trim, 2), "deg")
-    out("F5", "Swamped freeboard at the transom and at the bow", f"{fb_aft:.0f}; {fb_fwd:.0f}", "mm", "R5",
+        def lift(z):
+            return interp(tb_, z, "fv") * A["rho_w"]
+        lo, hi = 0.0, 400.0
+        for _ in range(50):
+            z = (lo + hi) / 2
+            if lift(z) > weight(z):
+                hi = z
+            else:
+                lo = z
+        zw = (lo + hi) / 2
+        Aw, xc, IT, IL = foam_waterplane(zw, foam_names)
+        fx, fz, wm = interp(tb_, zw, "fx"), interp(tb_, zw, "fz"), interp(tb_, zw, "wm")
+        items = [(fixed, 1700.0, 0, 150.0), (wm, interp(tb_, zw, "wx"), 0, interp(tb_, zw, "wz"))] + sw
+        Wt, lx, _, kz = combine(items)
+        V = Wt / A["rho_w"]
+        GML = fz / 1000 + IL / V - kz / 1000
+        GMT = fz / 1000 + IT / V - kz / 1000
+        trim = math.degrees((fx - lx) / 1000 / GML)
+        fb_aft = P["D"] - (zw + math.radians(trim) * (xc * 1000 - 0.0))
+        fb_fwd = P["D"] - (zw - math.radians(trim) * (P["L"] - xc * 1000))
+        return {"zw": zw, "W": weight(zw), "trim": trim, "fb_aft": fb_aft, "fb_fwd": fb_fwd, "GMT": GMT, "Wt": Wt,
+                "full": weight(400.0)}
+
+    # rule: the aft crew member (standing at 400 mm from the transom) moves amidships when swamped
+    rule = [(q[0], 1800.0 if q[1] == 400.0 else q[1], q[2], q[3]) for q in rated]
+    base = swamped(rated, FOAM)                       # quarter foam fitted, crew where they were: rule not followed
+    both = swamped(rule, FOAM)                        # quarter foam fitted and the rule followed (decided, C)
+    no_q = [n for n in FOAM if not n.startswith("bench quarter")]
+    rule_only = swamped(rule, no_q)                   # for comparison: rule without the quarter foam
+    neither = swamped(rated, no_q)                    # for comparison: neither (the design before LSK-DDR-003)
+    zw, trim, fb_aft, fb_fwd, GMT, Wt = base["zw"], base["trim"], base["fb_aft"], base["fb_fwd"], base["GMT"], base["Wt"]
+    out("F2", "Swamped, rated persons aboard in their places: water level inside and out, above the outside of the bottom",
+        round(zw), "mm")
+    out("F3", "Swamped: weight carried by the foam (persons at two thirds)", round(base["W"]), "kg")
+    out("F4", "Swamped trim (+ = stern down), quarter foam fitted, aft crew not moved", round(trim, 2), "deg")
+    out("F5", "Swamped freeboard at the transom and at the bow, quarter foam fitted, aft crew not moved",
+        f"{fb_aft:.0f}; {fb_fwd:.0f}", "mm", "R5",
         "Met on paper" if min(fb_aft, fb_fwd) > 0 and abs(trim) < 5 else "Not met")
+    out("F5r", "Swamped with the quarter foam and the operating rule (aft crew amidships): trim; transom freeboard; bow freeboard",
+        f"{both['trim']:.2f}; {both['fb_aft']:.0f}; {both['fb_fwd']:.0f}", "deg; mm; mm")
+    out("F5o", "For comparison, operating rule only (no quarter foam): trim; transom freeboard",
+        f"{rule_only['trim']:.2f}; {rule_only['fb_aft']:.0f}", "deg; mm")
+    out("F5n", "For comparison, neither quarter foam nor rule: trim; transom freeboard",
+        f"{neither['trim']:.2f}; {neither['fb_aft']:.0f}", "deg; mm")
     out("F6", "Swamped transverse GM", round(GMT, 2), "m")
     hl = math.degrees(math.atan(2 * p_ * A["swamp_person"] * 0.4 / (Wt * GMT)))
     out("F7", "Swamped heel with two seated persons moving 400 mm to one side", round(hl, 1), "deg")
     out("F8", "Swamped low-side freeboard in that case", round(P["D"] - zw - M.half(P["D"], 0, P) * math.tan(math.radians(hl))), "mm")
     out("F9", "Foam needed for zero freeboard, rated persons, as a share of the fitted foam",
-        round((weight(400.0)) / (foam_tot * A["rho_w"]), 2))
+        round(base["full"] / (foam_tot * A["rho_w"]), 2))
 
     # structure
     span = max(P["stringer_y"] - P["stringer"][0] / 2 - P["stringer"][0] / 2,
@@ -450,7 +476,7 @@ def main():
                                                         "frames": 1.0, "glass": 0.0, "hdpe": 1.0},
     }
     ply_kg = m["by_mat"]["ply"]
-    hw_kg = m["by_mat"]["hw"]
+    hw_kg = m["by_mat"]["hw"] + m["by_mat"]["sw"]
     rest = hull - ply_kg - hw_kg - m["glass_epoxy"]
     rows = []
     for name, f in paths.items():
@@ -465,49 +491,13 @@ def main():
             f"{hm:.0f}; {pay:.0f}; {pay / hm:.1f}", "kg; kg; -", "R8" if i == 1 else None,
             "Met on paper (three paths documented)" if i == 1 else None)
 
-    # options for the decisions for Amish (screening estimates, docs/REVIEW.md TRL 3 section)
-    soft = sum(part_mass(n) for n in NAMED if MAT[n] == "hw" and n.startswith(("ring frame", "inwale", "stringer",
-                                                                                "bench rail", "knuckle floor")))
-    side_ply = sum(part_mass(n) for n in NAMED if n.startswith("side"))
-    light = (hull - ply_kg * (1 - 450 / A["rho_ply"]) - side_ply * 450 / A["rho_ply"] / 3
-             - soft * (1 - 500 / A["rho_hw"]) - A["glass_in"] * m["a_bot"])
-    out("O1", "Option: light timber specification (okoume plywood 450 kg/m3, 4 mm sides, softwood framing 500 kg/m3, "
-        "no glass inside the floor): hull mass", round(light, 1), "kg")
-    out("O2", "Option O1: aft half; forward half (split in the same proportion as now)",
-        f"{light * m['by_half']['aft'] / hull:.1f}; {light * m['by_half']['fwd'] / hull:.1f}", "kg")
-    out("O3", "Option O1: rated load over hull mass", round(rated_kg / light, 2))
-    five = rated[:-1]
-    W5, l5, _, k5 = combine([hb, gear] + five)
-    r5 = float_at(W5, l5, k5)
-    out("O4", "Option: rated load of five persons (375 kg): deepest draft; over hull mass",
-        f"{max(r5['T_aft'], r5['T_fwd']):.0f}; {375 / hull:.2f}", "mm; -")
-    W6, l6, _, k6 = combine([(light, m["lcg"], 0.0, m["kg"]), gear] + rated)
+    # decided state against the pre-decision design (LSK-DDR-003): six persons for comparison
+    W6, l6, _, k6 = combine([hb, gear] + six)
     r6 = float_at(W6, l6, k6)
-    out("O5", "Option O1 with six persons: deepest draft", round(max(r6["T_aft"], r6["T_fwd"])), "mm")
-    four = rated[:3] + [rated[4]]          # crew of two, one adult on each pair of benches
-    W4, l4, _, k4 = combine([hb, gear] + four)
-    r4 = float_at(W4, l4, k4)
-    out("O9", "Option: rated load of four persons (300 kg, a crew of two and two adults): deepest draft; over hull mass",
-        f"{max(r4['T_aft'], r4['T_fwd']):.0f}; {300 / hull:.2f}", "mm; -")
-    W7, l7, _, k7 = combine([(light, m["lcg"], 0.0, m["kg"]), gear] + five)
-    r7 = float_at(W7, l7, k7)
-    out("O10", "Option O1 with five persons (375 kg): deepest draft; over hull mass",
-        f"{max(r7['T_aft'], r7['T_fwd']):.0f}; {375 / light:.2f}", "mm; -")
-    bw = (2 * M.half(0, 0, P) + 60) / (2 * M.half(0, 0, P))
-    out("O6", "Option: bottom 60 mm wider (beam still within the lane limit): deepest draft at rated load (scaled)",
-        round(max(r["T_aft"], r["T_fwd"]) / bw), "mm")
-    # stern quarter foam: two 15 L blocks, 250 x 300 x 200 mm, high in the quarters either side of the step opening
-    add_l, xq, aq = 30.0, 150.0, 2 * 0.25 * 0.30
-    rise_all = add_l / 1000 / (Aw + aq) * 1000
-    dtrim = math.degrees(add_l * (xq - xc * 1000) / 1000 / (Wt * GML))
-    fb_aft2 = fb_aft + rise_all - math.radians(dtrim) * xc * 1000
-    out("O7", "Option: 30 L of foam in the stern quarters: swamped trim; transom freeboard (estimate)",
-        f"{trim + dtrim:.2f}; {fb_aft2:.0f}", "deg; mm")
-    rule = [(q[0] * A["swamp_person"], 1800.0 if q[1] == 400.0 else q[1], q[2], q[3]) for q in rated]
-    Wr, lr, _, kr = combine([(fixed, 1700.0, 0, 150.0), (wm, interp(tab, zw, "wx"), 0, interp(tab, zw, "wz"))] + rule)
-    trim_r = math.degrees((fx - lr) / 1000 / GML)
-    out("O8", "Option: operating rule, aft crew moves to amidships when swamped: trim; transom freeboard",
-        f"{trim_r:.2f}; {P['D'] - (zw + math.radians(trim_r) * xc * 1000):.0f}", "deg; mm")
+    out("D1", "For comparison, six persons (450 kg) on the decided hull: deepest draft; load over hull mass",
+        f"{max(r6['T_aft'], r6['T_fwd']):.0f}; {450 / hull:.2f}", "mm; -")
+    out("D2", "Rated load needed for R2 (six times hull mass) on the decided hull; persons at 75 kg",
+        f"{6 * hull:.0f}; {6 * hull / p_:.1f}", "kg; -")
 
     # cost (R9)
     with (ROOT / "bom" / "bom.csv").open() as fh:

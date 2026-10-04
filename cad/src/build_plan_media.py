@@ -23,6 +23,10 @@ P = M.PARAMS
 OUT = ROOT / "docs" / "05-build-plan"
 DWG = ROOT / "cad" / "drawings"
 DATE = "2026-10-03"
+# making sketches changed by the round 2 requirement decisions (LSK-DDR-003, Amish, 2026-10-03)
+REV_P2 = {101: "okoume, 60 mm wider, no glass inside", 102: "4 mm okoume", 103: "okoume, wider",
+          104: "okoume, wider", 105: "okoume, wider", 106: "softwood", 107: "softwood", 108: "softwood",
+          109: "wider; stern quarter modules added", 110: "wider deck"}
 ROWS = M.build_all(P)
 N = {n: s for n, *_, s in ROWS}
 H = {n: h for n, h, *_ in ROWS}
@@ -61,7 +65,7 @@ def components():
         Part("Stringers (6) and knuckle floor", sel("stringer", "knuckle floor"), COL["stringer"], 8, (0, 0, 300)),
         Part("Bow box wall, deck and foam", sel("bow box wall", "bow deck", "bow foam", "bow eye pad"), COL["box"], 9,
              (600, 0, 650)),
-        Part("Bench modules (4): rail, cover, foam, straps", sel("bench"), COL["cover"], 9, (0, 0, 1050)),
+        Part("Bench modules (4) and stern quarter modules (2)", sel("bench"), COL["cover"], 9, (0, 0, 1050)),
         Part("Rub strakes (4) and skids (4)", sel("rub strake", "skid"), COL["strake"], 12, (0, 0, -900)),
         Part("Hinge rail, backing block, bolts", sel("hinge rail", "transom backing block", "rail bolts"), COL["rail"],
              14, (-1250, 0, -150)),
@@ -97,11 +101,15 @@ def sheets():
     hull_fwd = [shell(FWD_SHELL)]
     both = hull_aft + hull_fwd
     def sheet(no, title, mat, notes, part, nb, vs=None, iv=(22, -60)):
-        bv.component_sheet(Part(title, part, "#0F766E"), nb, PRJ, f"LSK-DWG-{no}", title, mat, notes, DATE,
+        kw = {}
+        if no in REV_P2:
+            kw = dict(rev="P2", revisions=[("P1", "Making sketch for the prototype build plan", DATE, "AC"),
+                                           ("P2", f"LSK-DDR-003: {REV_P2[no]}", DATE, "AC")])
+        bv.component_sheet(Part(title, part, "#0F766E"), nb, PRJ, f"LSK-DWG-{no}", title, mat, notes, DATE, **kw,
                            view_shape=vs, inset_view=iv, out_dir=str(DWG))
-    sheet(101, "Bottom panels (aft, forward flat, bow rake)", "6 mm marine plywood, glass outside",
-          ["Aft bottom 1,800 x 988; forward flat 900 x 988; bow rake panel",
-           "  921 long, 1,000 wide aft to 1,056 at the bow (sides flare).",
+    sheet(101, "Bottom panels (aft, forward flat, bow rake)", "6 mm okoume marine plywood, glass outside only",
+          ["Aft bottom 1,800 x 1,052; forward flat 900 x 1,052; bow rake",
+           "  panel 921 long, 1,052 wide aft to 1,110 at the bow.",
            "Mark the centreline and the stringer lines 150 each side.",
            "Long edges are straight; they butt the inside of the side panels.",
            "Drill 2 mm stitch holes 12 in from the edges every 150.",
@@ -109,7 +117,7 @@ def sheets():
            "  to sit under the bow transom.",
            "Seal both faces with epoxy before stitching."],
           sel("bottom"), [shell(AFT_SHELL + FWD_SHELL, ("bottom",))])
-    sheet(102, "Side panels (four)", "6 mm marine plywood",
+    sheet(102, "Side panels (four)", "4 mm okoume marine plywood",
           ["Aft sides 1,800 x 400 rectangles (two).",
            "Forward sides 1,800 long, 400 high aft; bottom edge straight",
            "  for 900, then rising to 200 at the bow end (two, handed).",
@@ -120,7 +128,7 @@ def sheets():
            "  ends flush with the transom and bulkhead outer faces."],
           sel("side aft port", "side forward port"), [shell(AFT_SHELL + FWD_SHELL, ("side aft port", "side forward port"))],
           vs=flat_side(sel("side aft port", "side forward port")), iv=(22, 120))
-    sheet(103, "Stern transom", "9 mm marine plywood",
+    sheet(103, "Stern transom", "9 mm okoume marine plywood",
           [f"Trapezoid: {2 * M.half(P['t_bot'], P['t_side'], P):.0f} wide at the bottom, "
            f"{2 * M.half(P['D'], P['t_side'], P):.0f} at the top, 394 high.",
            "Sides bevelled 8 deg to lie flat on the side panels.",
@@ -130,16 +138,16 @@ def sheets():
            "  at 110 and 280 each side of the centreline;",
            "  two 9 holes for each pad eye, 380 up, 270 each side."],
           N["stern transom"], [shell(AFT_SHELL, ("stern transom",))], iv=(22, -130))
-    sheet(104, "Bow transom", "9 mm marine plywood",
-          ["Trapezoid about 1,120 wide at the bottom edge, 1,128 at the",
-           "  top, about 191 high; bottom edge bevelled 12.5 deg to the rake.",
+    sheet(104, "Bow transom", "9 mm okoume marine plywood",
+          ["Trapezoid about 1,109 wide at the bottom edge, 1,164 at the",
+           "  top, about 196 high; bottom edge bevelled 12.5 deg to the rake.",
            "Sides bevelled 8 deg to the side panels.",
            "Sits on the bow rake panel, between the sides, flush forward.",
            "Bow eye: two 9 holes 330 above the hull bottom line,",
            "  25 each side of the centreline, through the hardwood pad."],
           N["bow transom"], [shell(FWD_SHELL, ("bow transom",))])
-    sheet(105, "Joint bulkheads (two)", "6 mm marine plywood",
-          ["Same trapezoid as the transom: 394 high, 988 to 1,099 wide.",
+    sheet(105, "Joint bulkheads (two)", "6 mm okoume marine plywood",
+          ["Same trapezoid as the transom: 394 high, 1,054 to 1,164 wide.",
            "One closes each half; the halves are separate boxes.",
            "Sits on the bottom panel, between the sides, flush with the",
            "  panel ends; glued and taped inside and out.",
@@ -147,7 +155,7 @@ def sheets():
            "  bulkhead and ring frame together, both halves clamped",
            "  face to face, so the holes line up."],
           N["joint bulkhead aft"], [shell(AFT_SHELL, ("joint bulkhead",))])
-    sheet(106, "Ring frames (three)", "Durable hardwood 20 x 45",
+    sheet(106, "Ring frames (three)", "Treated softwood 20 x 45",
           ["Four members: bottom, two sides at 8 deg, top; half-lapped.",
            "Outer edge follows the inside of the hull; 45 wide all round.",
            "One on the transom (inside face), one on each joint bulkhead.",
@@ -157,7 +165,7 @@ def sheets():
            "  377 up; pins at 400 each side, 377 up.",
            "Nut plates on the aft joint frame's aft face (see joint 4)."],
           N["ring frame joint aft"], hull_aft)
-    sheet(107, "Inwales (four)", "Durable hardwood 20 x 40",
+    sheet(107, "Inwales (four)", "Treated softwood 20 x 40",
           ["Aft inwales 1,739 long; forward inwales 1,762 long.",
            "Top edge bevelled 8 deg to sit flush with the side's top edge.",
            "Glue and screw to the inside of the side panel from outside",
@@ -166,7 +174,7 @@ def sheets():
            "The rub strake screws go through the side into it.",
            "The bench module top bears up against its underside."],
           N["inwale aft port"], hull_aft, vs=flat_side(N["inwale aft port"]), iv=(30, -120))
-    sheet(108, "Stringers and knuckle floor", "Durable hardwood 40 x 20 and 40 x 45",
+    sheet(108, "Stringers and knuckle floor", "Treated softwood 40 x 20 and 40 x 45",
           ["Six stringers 40 x 20: three per half at the centreline and",
            "  150 each side; aft 1,739 long, forward 851 long.",
            "Glue flat to the floor, butted to the ring frames.",
@@ -174,19 +182,23 @@ def sheets():
            "  knuckle; underside cut to the two bottom slopes (12.5 deg).",
            "The skids are screwed from outside into the side stringers."],
           sel("stringer aft", "knuckle floor"), both)
-    sheet(109, "Bench module (four)", "PE foam 50 mm layers, PVC tarpaulin 650 g/m2, hardwood rail, webbing",
+    sheet(109, "Bench module (four) and stern quarter module (two)",
+          "PE foam 50 mm layers, PVC tarpaulin 650 g/m2, softwood rail, webbing",
           ["Foam core: 50 layers stacked to 350, outboard edge bevelled",
-           "  8 deg; 1,735 long aft, 847 long forward; 160 to 210 wide.",
+           "  8 deg; 1,735 long aft, 847 long forward; 193 to 242 wide.",
            "Cover: sewn sleeve, laced ends; same as LevelHull modules.",
-           "Rail 40 x 20 hardwood glued and screwed to the floor along",
+           "Rail 40 x 20 softwood glued and screwed to the floor along",
            "  the module's inboard foot, 330 from the centreline.",
            "Straps 50 webbing (three aft, two forward): screwed to the",
            "  inwale's inner face, over the module, down to the rail.",
-           "Module top touches the underside of the inwale."],
-          sel("bench rail aft port", "bench cover aft port", "bench straps aft port"), hull_aft)
+           "Quarter module: core 205 x 222 x 330 (15 L), 40 from the",
+           "  transom, on the side stringer and rail; two straps from",
+           "  the floor at its inboard foot, over it, to the inwale."],
+          sel("bench rail aft port", "bench cover aft port", "bench straps aft port", "bench quarter cover port",
+              "bench quarter straps port"), hull_aft)
     sheet(110, "Bow box: wall, deck, foam, eye pad", "6 mm marine plywood, PE foam, hardwood pad",
           ["Wall 6 thick at 3,000 from the transom, cut to the rake and",
-           "  notched round the inwales; deck 591 x about 1,060.",
+           "  notched round the inwales; deck 591 x about 1,124.",
            "Foam fills the box in 50 layers cut to the rake; cut round",
            "  the hardwood bow eye pad (20 x 120 x 80, glued to the",
            "  bow transom before the foam goes in).",
@@ -330,7 +342,8 @@ def steps():
     iw = p("Inwales", sel("inwale aft"), COL["inwale"], (0, 0, 400))
     st = p("Stringers and bench rails", sel("stringer aft", "bench rail aft"), COL["stringer"], (0, 0, 400))
     sk = p("Skids and rub strakes", sel("skid aft", "rub strake aft"), COL["skid"], (0, 0, -350))
-    bm = p("Bench modules with straps", sel("bench cover aft", "bench foam aft", "bench straps aft"), COL["cover"],
+    bm = p("Bench and stern quarter modules with straps", sel("bench cover aft", "bench foam aft", "bench straps aft",
+                                                             "bench quarter"), COL["cover"],
            (0, 0, 450))
     rl = p("Hinge rail, backing block, M8 bolts", sel("hinge rail", "transom backing block", "rail bolts"), COL["rail"],
            (-350, 0, 0))
@@ -382,7 +395,7 @@ def steps():
             "As steps 6 and 10 to 11 on the aft half", elev=26, azim=-58, label_done=False)
     aft_done = [bot, sides, tr, bh, rf, iw, st, sk]
     for title, sub, new, az in (
-            ("Step 10: strap in the aft bench modules", "Module tight under the inwale; straps screwed to inwale and rail",
+            ("Step 10: strap in the aft bench and quarter modules", "Modules tight under the inwale; straps screwed to inwale, rail and floor",
              [bm], -58),
             ("Step 11: fit the grab and carry handles", "M6 bolts down through the inwales; transom handles through the frame",
              [hd], -58),

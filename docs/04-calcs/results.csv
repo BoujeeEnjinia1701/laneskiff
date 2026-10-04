@@ -1,63 +1,60 @@
 tag,item,value,unit,requirement,status
-M1,"Hull mass, complete, plywood and epoxy path (step, handles and strakes included; pole, paddles, line not)",100.2,kg,R1,Not met
-M2,"Aft half mass, with the stern step",55.7,kg,R1,Not met
-M3,Forward half mass,44.5,kg,R1,Not met
-M4ply,Mass of plywood,34.9,kg,,
-M4hw,Mass of hardwood,21.8,kg,,
-M4foam,Mass of foam,15.3,kg,,
+M1,"Hull mass, complete, plywood and epoxy path (step, handles and strakes included; pole, paddles, line not)",88.0,kg,R1,Not met
+M2,"Aft half mass, with the stern step",49.9,kg,R1,Not met
+M3,Forward half mass,38.1,kg,R1,Not met
+M9,"Carried by two per half with the shoulder slings: each carrier, aft half; forward half",25.0; 19.0,kg,,
+M4ply,Mass of okoume plywood,24.8,kg,,
+M4hw,Mass of hardwood,4.2,kg,,
+M4sw,Mass of softwood framing,12.8,kg,,
+M4foam,Mass of foam,18.3,kg,,
 M4hdpe,Mass of HDPE strakes and skids,4.7,kg,,
 M4steel,Mass of bolts and bow eye,1.3,kg,,
-M4fabric,Mass of bench covers and straps,4.2,kg,,
+M4fabric,Mass of bench covers and straps,5.1,kg,,
 M4bought,Mass of bought fittings,4.3,kg,,
-M5,"Glass, epoxy, coating, tapes and small fixings",13.6,kg,,
+M5,"Glass, epoxy, coating, tapes and small fixings",12.4,kg,,
 M6,"Loose gear: pole, two paddles, bow line",6.2,kg,,
-M7,Hull LCG from the transom; KG above the outside of the bottom,1588; 174,mm,,
-M8,Plywood areas: bottom; sides; other panels,3.58; 2.73; 2.95,m2,,
-L1,Rated load: a crew of two and four adults at 75 kg,450,kg,,
-L2,Rated load over hull mass,4.49,,R2,Not met
-H1,"Draft at rated load, even keel (outside of the bottom)",175,mm,,
-H2,Trim at rated load (+ = stern down); draft at the transom; draft at the forward end of the waterline,-0.41; 162; 187,deg; mm; mm,R3,Not met
-H3,"Freeboard at rated load, lowest (transom)",238,mm,,
-H4,Waterline length and beam at rated load,3.49; 1.05,m,,
-H5,Transverse metacentric height GM at rated load,0.15,m,,
-H6,Load to sink 10 mm at rated draft,36.6,kg,,
-H7,"Load carried at 150 mm draft, even keel",361,kg,,
-H8,That load over hull mass,3.61,,,
-H9,Draft with the crew of two only,87,mm,,
-B1,"Heel, 80 kg boarder on the stern step, 150 mm off the centreline",4.3,deg,R6,Met
-B2,Trim and transom freeboard while boarding over the stern,0.7; 270,deg; mm,,
-B3,"For comparison, heel with the same boarder over the side, at the gunwale",15.6,deg,,
-B4,Low-side freeboard with the side boarder,133,mm,,
-F1,Buoyancy foam in the hull (benches and bow box),0.494,m3,,
-F2,"Swamped, rated persons aboard: water level inside and out, above the outside of the bottom",290,mm,,
-F3,Swamped: weight carried by the foam (persons at two thirds),357,kg,,
-F4,Swamped trim (+ = stern down),2.05,deg,,
-F5,Swamped freeboard at the transom and at the bow,36; 164,mm,R5,Met on paper
-F6,Swamped transverse GM,0.32,m,,
-F7,Swamped heel with two seated persons moving 400 mm to one side,19.3,deg,,
-F8,Swamped low-side freeboard in that case,-85,mm,,
-F9,"Foam needed for zero freeboard, rated persons, as a share of the fitted foam",0.69,,,
+M7,Hull LCG from the transom; KG above the outside of the bottom,1554; 177,mm,,
+M8,Plywood areas: bottom; sides; other panels,3.82; 2.73; 3.09,m2,,
+L1,Rated load: a crew of two and three adults at 75 kg (five persons),375,kg,,
+L2,Rated load over hull mass,4.26,,R2,Not met
+H1,"Draft at rated load, even keel (outside of the bottom)",143,mm,,
+H2,Trim at rated load (+ = stern down); draft at the transom; draft at the forward end of the waterline,0.16; 148; 138,deg; mm; mm,R3,Met
+H3,"Freeboard at rated load, lowest (transom)",252,mm,,
+H4,Waterline length and beam at rated load,3.34; 1.10,m,,
+H5,Transverse metacentric height GM at rated load,0.31,m,,
+H6,Load to sink 10 mm at rated draft,36.8,kg,,
+H7,"Load carried at 150 mm draft, even keel",401,kg,,
+H8,That load over hull mass,4.55,,,
+H9,Draft with the crew of two only,79,mm,,
+B1,"Heel, 80 kg boarder on the stern step, 150 mm off the centreline",3.3,deg,R6,Met
+B2,Trim and transom freeboard while boarding over the stern,0.7; 279,deg; mm,,
+B3,"For comparison, heel with the same boarder over the side, at the gunwale",12.8,deg,,
+B4,Low-side freeboard with the side boarder,164,mm,,
+F1,"Buoyancy foam in the hull (benches, stern quarter modules and bow box)",0.592,m3,,
+F2,"Swamped, rated persons aboard in their places: water level inside and out, above the outside of the bottom",225,mm,,
+F3,Swamped: weight carried by the foam (persons at two thirds),307,kg,,
+F4,"Swamped trim (+ = stern down), quarter foam fitted, aft crew not moved",0.45,deg,,
+F5,"Swamped freeboard at the transom and at the bow, quarter foam fitted, aft crew not moved",160; 188,mm,R5,Met on paper
+F5r,Swamped with the quarter foam and the operating rule (aft crew amidships): trim; transom freeboard; bow freeboard,-1.17; 215; 142,deg; mm; mm,,
+F5o,"For comparison, operating rule only (no quarter foam): trim; transom freeboard",-0.44; 181,deg; mm,,
+F5n,"For comparison, neither quarter foam nor rule: trim; transom freeboard",1.41; 115,deg; mm,,
+F6,Swamped transverse GM,0.56,m,,
+F7,Swamped heel with two seated persons moving 400 mm to one side,13.2,deg,,
+F8,Swamped low-side freeboard in that case,38,mm,,
+F9,"Foam needed for zero freeboard, rated persons, as a share of the fitted foam",0.49,,,
 S1,Floor: largest clear span between stringers and bench faces,160,mm,,
 S2,"Floor bending stress under a 1.2 kN foot load (plywood only, glass ignored)",26.7,MPa,,
 S3,Floor factor against plywood bending strength,1.5,,,
-S4,"Joint: hogging over a kerb at the joint, rated load, top bolt tension each",3.2,kN,,
-S5,Joint bolt factor (bolt proof; nut plate bearing),9.0; 5.0,,,
+S4,"Joint: hogging over a kerb at the joint, rated load, top bolt tension each",2.7,kN,,
+S5,Joint bolt factor (bolt proof; nut plate bearing),10.7; 3.5,,,
 S6,"Step: pull in each stop strap, 80 kg kneeling on the aft edge, dynamic factor 2",1.88,kN,,
 S7,Stop strap factor against webbing strength,4.2,,,
 S8,"Hinge load each (upper bound), and factor",2.67; 1.5,kN,,
 T1,"Joining the halves: place and align 2 min, eight bolts at 25 s, check 1 min (estimate)",6.2,min,R7,Met on paper (estimate)
-P1,Build path: Plywood and epoxy; hull mass; load at 150 mm draft; ratio,100; 361; 3.6,kg; kg; -,R8,Met on paper (three paths documented)
-P2,"Build path: Aluminium 5052 sheet, welded or riveted; hull mass; load at 150 mm draft; ratio",98; 364; 3.7,kg; kg; -,,
-P3,"Build path: HDPE or polypropylene sheet, plastic welded; hull mass; load at 150 mm draft; ratio",110; 352; 3.2,kg; kg; -,,
-O1,"Option: light timber specification (okoume plywood 450 kg/m3, 4 mm sides, softwood framing 500 kg/m3, no glass inside the floor): hull mass",82.5,kg,,
-O2,Option O1: aft half; forward half (split in the same proportion as now),45.9; 36.6,kg,,
-O3,Option O1: rated load over hull mass,5.45,,,
-O4,Option: rated load of five persons (375 kg): deepest draft; over hull mass,160; 3.74,mm; -,,
-O5,Option O1 with six persons: deepest draft,184,mm,,
-O9,"Option: rated load of four persons (300 kg, a crew of two and two adults): deepest draft; over hull mass",155; 2.99,mm; -,,
-O10,Option O1 with five persons (375 kg): deepest draft; over hull mass,154; 4.54,mm; -,,
-O6,Option: bottom 60 mm wider (beam still within the lane limit): deepest draft at rated load (scaled),176,mm,,
-O7,Option: 30 L of foam in the stern quarters: swamped trim; transom freeboard (estimate),0.37; 113,deg; mm,,
-O8,"Option: operating rule, aft crew moves to amidships when swamped: trim; transom freeboard",0.02; 109,deg; mm,,
-C1,Estimated cost of the constructable design (bom/bom.csv),1922,USD,R9,Over the value-engineering target by USD 422
+P1,Build path: Plywood and epoxy; hull mass; load at 150 mm draft; ratio,88; 401; 4.6,kg; kg; -,R8,Met on paper (three paths documented)
+P2,"Build path: Aluminium 5052 sheet, welded or riveted; hull mass; load at 150 mm draft; ratio",101; 387; 3.8,kg; kg; -,,
+P3,"Build path: HDPE or polypropylene sheet, plastic welded; hull mass; load at 150 mm draft; ratio",111; 377; 3.4,kg; kg; -,,
+D1,"For comparison, six persons (450 kg) on the decided hull: deepest draft; load over hull mass",177; 5.11,mm; -,,
+D2,Rated load needed for R2 (six times hull mass) on the decided hull; persons at 75 kg,528; 7.0,kg; -,,
+C1,Estimated cost of the constructable design (bom/bom.csv),2098,USD,R9,Over the value-engineering target by USD 598
 R10,Fin drive,not designed in the first prototype,,R10,Not shown on paper

@@ -1,5 +1,86 @@
 # Review note: LaneSkiff
 
+## Session 2026-10-03: round 2 requirement decisions applied
+
+Amish, 2026-10-03: "i approve all of the 47 recommendations provided by you. Execute them." The five LaneSkiff decisions posed in the TRL 3 session below (R1, R2, R3, R5, R10) are therefore decided exactly as recommended and recorded in `docs/decisions/0003-requirement-decisions-round2.md` (LSK-DDR-003). They were carried into the design at TRL 3 scope only; nothing was built, tested or bought. The decisions are linked, and the five-person rating of R3 changes every result that depends on the rated load or the swamped buoyancy, so LSK-CAL-001 was recomputed on the decided design as a whole.
+
+### What changed
+
+| Decision | What changed in the repo |
+| --- | --- |
+| R1 A, with the slings: light timber specification | `cad/src/model.py` side panels 6 to 4 mm; `sizing.py` okoume plywood 450 kg/m3, softwood framing 500 kg/m3 (ring frames, inwales, stringers, bench rails, knuckle floor), no glass inside the floor, nut plate bearing on softwood; BOM lines 1 to 8 and 23; making sketches `LSK-DWG-101` to `108` Rev P2; build plan sections 1, 3.1 to 3.8 |
+| R2 A, with R1 A | No further change; ratio recomputed at the five-person rating (see below) |
+| R3 B: light specification, five persons (375 kg), bottom 60 mm wider | `model.py` bottom half width 500 to 530 mm (beam 1,197 mm); `sizing.py` five persons; BOM line 10 (7 foam sheets) and panel sizes; `LSK-DWG-001` Rev P3, `LSK-DWG-109`, `110` Rev P2; requirements definition of rated load; concept and README |
+| R5 C (safety): stern quarter foam and the operating rule | `model.py` two covered 15 L modules with straps (seven new contact checks, 80 of 80 checks pass); `sizing.py` swamped cases with and without the rule and the foam; BOM line 29 (covers and straps) and line 30 (capacity plate); capacity plate text in the build plan (section 3.15, step 10 and the safety stops) and in the README Safety and new Operating notes sections |
+| R10 A, with C as a later idea | Requirements, concept, README and register: no fin drive in the first prototype; an open fixed forward-only fin drive kept as a later, separate portfolio idea |
+
+Also updated: `docs/04-calcs/01-sizing.md` (LSK-CAL-001 v0.2) and `results.csv`, `docs/03-requirements.md` (v0.3; targets unchanged, only the rated load definition restated as the R3 option says), `docs/02-concept.md` (v0.3), `docs/05-build-plan.md` (v0.2), `docs/06-design-decisions.md` (v0.2), `cad/src/concept_media.py`, `cad/src/product_model.py` (colours for the new parts), `cad/src/build_plan_media.py`, `cad/src/sheets.py`, and `project.yaml` (trl_evidence; estimate in the budget comment). STEP and STL, the GA, all fourteen making sketches, the build plan overview, joints and steps, the concept media (`hero.png`, `exploded.png`, `cutaway.png`, `concept-blueprint`) and `media/model.glb` (linear deflection 1.0, angular 0.35) were regenerated from the model.
+
+### Requirement status
+
+| ID | Before | After |
+| --- | --- | --- |
+| R1 | Not met: 100.2 kg; halves 55.7 and 44.5 kg | Not met: 88.0 kg; halves 49.9 and 38.1 kg; 25.0 and 19.0 kg each for two carriers per half with the slings |
+| R2 | Not met: 4.49 at six persons | Not met: 4.26 at five persons (lower than before; the option's 5.45 assumed six persons) |
+| R3 | Not met: 187 mm at six persons | Met on paper: 148 mm at the transom, 138 mm forward, five persons (2 mm margin) |
+| R4 | Met: 1,137 mm | Met: 1,197 mm |
+| R5 | At risk: 2.1 deg, 36 mm at the transom | Met on paper: 0.45 deg, 160 mm with nobody moving; 215 mm with the rule |
+| R6 | Met on paper: 4.3 deg | Met on paper: 3.3 deg |
+| R9 | USD 1,922, USD 422 over the target | USD 2,098, USD 598 over the target |
+| R10 | Not shown (open) | Not shown on paper, decided: no drive in the first prototype |
+
+R7 and R8 are unchanged and met on paper.
+
+### Cost
+
+Value-engineering target: USD 1,500 (unchanged). Estimated cost of the constructable design: USD 2,098 (USD 1,922 before), USD 598 over the target. The light specification adds about USD 96 net: okoume plywood about USD 144 more (priced at about 1.4 times the local marine plywood of the BOM, an estimate), less USD 27 for softwood framing and USD 21 for the glass no longer inside the floor. One more foam sheet for the wider benches and the quarter modules adds USD 55, the quarter module covers and straps USD 14 (estimate), and the capacity plate USD 10 (estimate). The option estimates were about USD 150 together (USD 100, 20 and 30); the BOM gives USD 175 including the plate. `budget_usd` stays at 1,500 as Amish's value-engineering target; the estimate is updated in its comment.
+
+### New questions, proposed, awaiting Amish
+
+**6. R2 payload against R3 draft.**
+State: with the five-person rating the payload ratio is 4.26, lower than the 4.49 before the decisions, because the rating fell from six persons to five while the hull fell only from 100 to 88 kg. R2 (six times hull mass) would need 528 kg aboard; R3 (150 mm) allows about 401 kg. No rating meets both on this hull. The R2 target text also gives "about 300 kg or four adults plus crew", which 375 kg exceeds.
+
+| Option | Effect | Cost or mass |
+| --- | --- | --- |
+| A: restate R2 as an absolute payload: five persons (375 kg) within the R3 draft, with the ratio reported | R2 met on paper (375 kg at 148 mm) | None |
+| B: restate R2 as a ratio of at least 4 | Met on paper (4.26) | None |
+| C: keep six times hull mass | R2 not met; would need a hull of about 63 kg at five persons | None now |
+
+**Recommendation: A**: the payload that matters in a lane is how many people the boat carries within its draft, and that is what the capacity plate states.
+
+**7. Floor and side strength with the light specification.**
+State: the floor factor of 1.5 assumes 40 MPa plywood bending strength with no glass counted; okoume may be weaker, and the decided specification takes the glass off the inside of the floor. The 4 mm sides have no calculated load case for knocks against walls and kerbs in a lane.
+
+| Option | Effect | Cost or mass |
+| --- | --- | --- |
+| A: keep the decided specification; test sample panels at TRL 4 (a foot load on a floor panel between stringers, a knock on a 4 mm side panel) before the hull is built | Confirms or rejects the specification early | Test panels only |
+| B: put 200 g/m2 glass back inside the floor | Floor stiffer and abrasion margin restored | About 1.5 kg and USD 30 with its resin (estimate) |
+| C: 6 mm sides on the aft half only | Stronger sides where people board and carry | About 1.5 kg and USD 10 (estimate) |
+
+**Recommendation: A**: it keeps the decided mass saving and settles the question with a cheap test before any hull is built.
+
+### Safety notes
+
+- The swamped operating rule (stay in the boat, sit low and centred, the aft crew member moves amidships at once) is printed on the capacity plate with the five-person rating, and is in the README operating notes and the build plan safety stops. A new stop: no person is carried until the plate is on the transom and every crew member has read it.
+- The quarter foam alone keeps 160 mm at the transom, so the boat stays nearly level swamped even if the rule is not followed; with two people moving to one side the low gunwale stays 38 mm clear (it dipped before).
+- The draft at the rated load is only 2 mm inside R3; an extra person or heavier people push it over 150 mm. The plate states the limit in persons and kilograms.
+- The quarter modules are strapped down at the floor and the inwale like the bench modules so they cannot float out when swamped; they stand forward of the hinge rail bolts and clear of the poler's place.
+- The light specification lowers some margins: the joint nut plates now bear on softwood (factor 3.5, estimate, 5.0 before), the floor has no glass inside, and the 4 mm sides are thinner. Question 7 and the items to confirm cover them.
+- Unchanged: life jackets always, never in moving water, proof loads before boarding trials, the first swamp test with ballast in a pool.
+
+### Re-render
+
+The hero geometry changed visibly: the beam grew by 60 mm (1,137 to 1,197 mm), the side panels are thinner and two stern quarter modules now stand inside the stern, visible from above. The photoreal renders made on Amish's Mac (`media/render-hero.png` and the exploded and detail views) need a re-render from `cad/src/product_model.py`; the card and social preview should be remade after.
+
+### Pre-existing inconsistencies noticed (not changed)
+
+- BOM line 3 calls for a 12 mm transom sheet and line 5 calls the bulkhead sheet 9 mm, while the model has a 9 mm transom and 6 mm bulkheads; `BOM_NAMES` in `model.py` repeats this.
+- BOM line 9 still lists 4 mm plywood bench boxes, which LSK-DDR-002 replaced with tarpaulin-covered modules.
+
+### Recommended next step
+
+Amish's choices on questions 6 and 7 and a corrected BOM for the two pre-existing inconsistencies; then, when the phase allows TRL 4, the sample panel tests of question 7, the aft half built first, weighed, floated alone, and the step proof-loaded with CalRig before any boarding trial.
+
 ## Session 2026-09-30: scaffolded
 
 ### What was done

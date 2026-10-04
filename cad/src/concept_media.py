@@ -37,6 +37,7 @@ GROUPS = [
     ("Inwales", 7, "#8B5A2B", ("inwale",), (0, 0, 380)),
     ("Stringers and knuckle floor", 8, "#6F4521", ("stringer", "knuckle floor"), (0, 0, 120)),
     ("Bench modules: rails, covers, straps", 9, "#EA580C", ("bench rail", "bench cover", "bench straps"), (0, 0, 560)),
+    ("Stern quarter foam modules", 29, "#F59E0B", ("bench quarter",), (0, 0, 560)),
     ("Bow box wall and deck", 9, "#D9B98C", ("bow box wall", "bow deck"), (0, 0, 560)),
     ("Buoyancy foam", 10, "#FACC15", ("bench foam", "bow foam", "step float foam"), (0, 0, 760)),
     ("Joint bolts and nut plates", 11, "#374151", ("joint bolt", "alignment pin"), (0, 0, 0)),
@@ -111,11 +112,11 @@ def main():
     render_all(
         parts, project=PROJECT, title=f"{TITLE} concept", dwg_no="LSK-DWG-010",
         key_figures=[
-            "Hull 3.6 m long, 1.13 m beam over the rub strakes, 0.40 m deep; two halves of 1.8 m",
-            f"Hull {float(r('M1')):.0f} kg (halves {float(r('M2')):.0f} and {float(r('M3')):.0f} kg); plywood and epoxy",
-            f"Rated load six persons, 450 kg; deepest draft {r('H2').split('; ')[2]} mm",
+            f"Hull 3.6 m long, {2 * M.half(P['D'], -P['strake'][0], P) / 1000:.2f} m beam over the rub strakes, 0.40 m deep; two halves of 1.8 m",
+            f"Hull {float(r('M1')):.0f} kg (halves {float(r('M2')):.0f} and {float(r('M3')):.0f} kg); okoume plywood and epoxy",
+            f"Rated load five persons, 375 kg; deepest draft {max(int(v) for v in r('H2').split('; ')[1:])} mm",
             f"Stern-step boarding heel {float(r('B1')):.1f} deg; over the side {float(r('B3')):.1f} deg",
-            f"Swamped with rated persons: afloat, {r('F5').split('; ')[0]} mm freeboard at the transom",
+            f"Swamped with rated persons: afloat, {r('F5').split('; ')[0]} mm freeboard at the transom; stern quarter foam",
             f"Halves join with eight M10 bolts and one spanner in about {float(r('T1')):.0f} min (estimate)",
         ],
         scale_figure=True, web_model=False, cut=False,

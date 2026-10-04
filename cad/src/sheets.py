@@ -1,4 +1,4 @@
-"""LaneSkiff general arrangement sheet LSK-DWG-001, Rev P2 (TRL 3; LSK-DDR-002 applied).
+"""LaneSkiff general arrangement sheet LSK-DWG-001, Rev P3 (TRL 3; LSK-DDR-002 and LSK-DDR-003 applied).
 
 Run from the repo root:  python cad/src/sheets.py
 Writes cad/drawings/LSK-DWG-001.svg, .pdf and .png from the parametric model in cad/src/model.py
@@ -39,10 +39,11 @@ def main():
     sv = project_views(sec, work / "sec")
     sb = sec.bounding_box()
     s = Sheet(project="LaneSkiff", title="Two-piece flood rescue skiff: general arrangement",
-              dwg_no="LSK-DWG-001", rev="P2", author="Amish Chadha", date=DATE,
-              material="Plywood and epoxy path; parts per bom/bom.csv. PRELIMINARY, NOT FOR FABRICATION",
+              dwg_no="LSK-DWG-001", rev="P3", author="Amish Chadha", date=DATE,
+              material="Okoume plywood and epoxy path, softwood framing; parts per bom/bom.csv. PRELIMINARY, NOT FOR FABRICATION",
               revisions=[("P1", "Preliminary GA for TRL 3 (from cad/src/model.py)", DATE, "AC"),
-                         ("P2", "LSK-DDR-002: design for construction", DATE, "AC")])
+                         ("P2", "LSK-DDR-002: design for construction", DATE, "AC"),
+                         ("P3", "LSK-DDR-003: light specification, bottom 60 wider, quarter foam, 5 persons", DATE, "AC")])
     s.add_ortho(views)
     vw = (sb.max.Y - sb.min.Y) * SEC_K
     vh = (sb.max.Z - sb.min.Z) * SEC_K
@@ -59,21 +60,22 @@ def main():
     L += leader(X(-yb), Z(180), x0 - 1, y0 + vh + 16, "FOAM MODULE IN COVER (9, 10)", "end")
     L += leader(X(M.half(380, 16, P)), Z(380), tx, y0 + 2, "INWALE (7)")
     L += leader(X(M.half(385, -6, P)), Z(385), tx, y0 + 8, "RUB STRAKE (12)")
-    L += leader(X(M.half(200, 3, P)), Z(200), tx, y0 + 14, "SIDE 6 PLY (2)")
+    L += leader(X(M.half(200, 3, P)), Z(200), tx, y0 + 14, "SIDE 4 PLY (2)")
     L += leader(X(P["bench_y"] - 20), Z(16), tx, y0 + 20, "BENCH RAIL (9)")
     L += leader(X(P["stringer_y"]), Z(16), tx, y0 + 26, "STRINGER (8)")
     L += leader(X(P["stringer_y"]), Z(-4), tx, y0 + 32, "SKID (13)")
     L += leader(X(0), Z(3), tx, y0 + 38, "BOTTOM 6 PLY (1)")
     s._layers += L
     s.add_notes("Main sizes and figures (mm unless stated)", [
-        "Length 3,600 in two halves of 1,800; beam over strakes 1,134",
-        "Depth 400; bottom 1,000 wide at the chine; sides flared 8 deg",
+        f"Length 3,600 in two halves of 1,800; beam over strakes {2 * M.half(P['D'], -P['strake'][0], P):,.0f}",
+        f"Depth 400; bottom {2 * P['half_bot']:,.0f} wide at the chine; sides flared 8 deg",
         "Bottom flat to 2,700 from the transom, raked to 200 at the bow",
         "Each half closed by its own bulkhead; joint: 8 M10 x 80 bolts",
         "Bench modules 330 from the centreline to the side, top 360",
         "Stern step float 450 x 600 x 90, hinged 40 behind the rail",
         "Kick rung 270 below the float; stop straps at 20 deg down",
-        "Rated load 6 persons (450 kg); see LSK-CAL-001 for drafts",
+        "Rated load 5 persons (375 kg); see LSK-CAL-001 for drafts",
+        "Stern quarter foam modules 2 x 15 L; capacity plate on transom",
         "Third-angle; X from transom, Y to port; (n) = BOM line",
     ], x=276, y=118, width=146)
     out = s.save(ROOT / "cad" / "drawings" / "LSK-DWG-001")

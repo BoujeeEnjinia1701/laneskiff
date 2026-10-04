@@ -66,11 +66,11 @@ def look(name):
         return C_INSIDE, "painted", "shell", (fwd, 0, 0)
     if n.startswith(("ring frame", "inwale", "stringer", "knuckle floor", "bench rail", "bow eye pad")):
         return C_WOOD, "wood", "shell", (0, 0, 380 if n.startswith("inwale") else 150)
-    if n.startswith(("bench foam", "bow foam", "step float foam")):
+    if n.startswith(("bench foam", "bench quarter foam", "bow foam", "step float foam")):
         return C_FOAM, "rubber", "internal", (0, 0, 760)
-    if n.startswith("bench cover"):
+    if n.startswith(("bench cover", "bench quarter cover")):
         return C_COVER, "fabric", "shell", (0, 0, 560)
-    if n.startswith(("bench straps", "stop straps", "kick rung straps")):
+    if n.startswith(("bench straps", "bench quarter straps", "stop straps", "kick rung straps")):
         return C_STRAP, "fabric", "shell", (0, 0, 620)
     if n.startswith(("rub strake", "skid")):
         return C_HDPE, "plastic", "shell", (0, 0, -480 if n.startswith("skid") else 260)

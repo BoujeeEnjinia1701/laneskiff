@@ -4,7 +4,7 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827) [![REUSE compliant](https://github.com/BoujeeEnjinia1701/laneskiff/actions/workflows/reuse.yml/badge.svg)](https://github.com/BoujeeEnjinia1701/laneskiff/actions/workflows/reuse.yml)
 
-**Area:** Situational field hardware · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** USD 1,500 (estimated cost of the constructable design USD 1,922) · **Difficulty:** 3 of 5
+**Area:** Situational field hardware · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** USD 1,500 (estimated cost of the constructable design USD 2,098) · **Difficulty:** 3 of 5
 
 A flat-bottomed flood rescue boat two people carry into flooded lanes, with a floating stern step so people can climb in from waist-deep water.
 
@@ -14,7 +14,7 @@ A flat-bottomed flood rescue boat two people carry into flooded lanes, with a fl
 
 Flood rescue in lanes is slow and awkward for boats built for open water. Hard boats are heavy to carry in, tip when someone climbs over the side, and sit too high for a person standing in waist-deep water. LaneSkiff is a flat-bottomed skiff sized for lanes: two people carry it in, and a crew pushes it along with a pole or paddles. A floating step at the stern centre lets people climb aboard over the end, where the boat is least likely to heel, and built-in buoyancy keeps it level and afloat even when it is swamped.
 
-The hull splits into two rigid halves that bolt together, so it travels in a small vehicle and each half can be carried by one or two people. A material substitution table gives build paths in plywood and epoxy, aluminium sheet and plastic sheet, so local boatbuilders can make it with what they have. A fixed, forward-only fin drive is an optional add-on for longer transits; the core boat needs no engine. Payload is set at a realistic 5 to 8 times hull mass for a rigid hull.
+The hull splits into two rigid halves that bolt together, so it travels in a small vehicle and each half can be carried by two people with shoulder slings. A material substitution table gives build paths in plywood and epoxy, aluminium sheet and plastic sheet, so local boatbuilders can make it with what they have. A fixed, forward-only fin drive is an optional add-on for longer transits; the core boat needs no engine. The payload target is six times hull mass; the first prototype, rated for five persons, reaches 4.3 times on paper, so the target is still open (see the [design decisions register](docs/06-design-decisions.md)).
 
 ## Burning platform
 
@@ -59,25 +59,26 @@ Full problem statement: [docs/01-problem.md](docs/01-problem.md)
 
 LaneSkiff is a flat-bottomed boat that two people carry into flooded lanes and push along with a pole or paddle. People in waist-deep water climb in using a floating step at the back, and it stays level and afloat even when swamped.
 
-The constructable design is a 3.6 m punt-form skiff, 1.137 m wide over its rub strakes, stitched and glued from flat 6 mm plywood in two closed halves of 1.8 m that bolt together with eight M10 bolts and one spanner. Covered foam modules along both sides and a foam bow box keep it nearly level when swamped. On paper, a person boarding over the stern step heels it 4.3 degrees, against 15.6 degrees over the side. The hull weighs 100 kg as drawn, twice the carry target, and draws 187 mm at a six-person load; the options for those shortfalls are set out for decision in the [review note](docs/REVIEW.md).
+The constructable design is a 3.6 m punt-form skiff, 1.197 m wide over its rub strakes, stitched and glued from flat okoume plywood (6 mm bottom, 4 mm sides) on softwood framing, in two closed halves of 1.8 m that bolt together with eight M10 bolts and one spanner. It is rated for five persons (375 kg). Covered foam modules along both sides, two more in the stern quarters and a foam bow box keep it nearly level when swamped. On paper, a person boarding over the stern step heels it 3.3 degrees, against 12.8 degrees over the side; at its rated load it draws 148 mm; swamped it keeps 160 mm of freeboard at the transom. The hull weighs 88 kg as drawn (halves of 50 and 38 kg), still above the 50 kg carry target. Amish's decisions are in [LSK-DDR-003](docs/decisions/0003-requirement-decisions-round2.md); the questions still open are in the [design decisions register](docs/06-design-decisions.md).
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md) · Requirements: [docs/03-requirements.md](docs/03-requirements.md) · Calculations: [docs/04-calcs/01-sizing.md](docs/04-calcs/01-sizing.md) · Prototype build plan: [docs/05-build-plan.md](docs/05-build-plan.md) · Design decisions: [docs/06-design-decisions.md](docs/06-design-decisions.md)
 
 ## Key components
 
-- Flat-bottom hull in two closed halves of 6 mm plywood and epoxy, each with its own bulkhead and hardwood ring frame
+- Flat-bottom hull in two closed halves of okoume plywood and epoxy (6 mm bottom, 4 mm sides), each with its own bulkhead and softwood ring frame
 - Eight M10 joint bolts into welded nut plates, two alignment pins
-- Level flotation (LevelHull layout): covered foam bench modules along both sides and a foam bow box
+- Level flotation (LevelHull layout): covered foam bench modules along both sides, two stern quarter foam modules and a foam bow box
 - Stern-centre floating boarding step on strap hinges, with stop straps, a kick rung and two transom grab handles
 - Eight carry handles and two padded shoulder slings
+- Capacity plate on the transom: five persons or 375 kg, and the swamped operating rule
 - Two-section push pole, two paddles, bow eye and bow line
 - HDPE rub strakes and bottom skids
 - Material substitution table: plywood and epoxy, aluminium sheet, HDPE sheet
-- Optional fixed forward-only fin drive: not in the first prototype design (open decision)
+- Optional fixed forward-only fin drive: left out of the first prototype (Amish, 2026-10-03); an open forward-only fin drive is kept as a later portfolio idea
 
 ## Building the prototype
 
-The [prototype build plan](docs/05-build-plan.md) (LSK-BLD-001, plan, not yet built) shows a small boatyard how to build the first LaneSkiff component by component, with making sketches for fourteen made parts, close-ups of eight joints and a picture for each of seventeen assembly steps. The halves are stitched and glued from flat plywood panels, framed with hardwood and glassed outside; the foam modules are cut with a knife and sewn into covers; the step is a glued float on strap hinges. No one is carried before the step, straps, handles and joint are proof-loaded and the boat passes load and swamp trials in calm, shallow water with a safety boat, which is TRL 4 work.
+The [prototype build plan](docs/05-build-plan.md) (LSK-BLD-001, plan, not yet built) shows a small boatyard how to build the first LaneSkiff component by component, with making sketches for fourteen made parts, close-ups of eight joints and a picture for each of seventeen assembly steps. The halves are stitched and glued from flat okoume plywood panels, framed with softwood and glassed outside; the foam modules are cut with a knife and sewn into covers; the step is a glued float on strap hinges. No one is carried before the step, straps, handles and joint are proof-loaded and the boat passes load and swamp trials in calm, shallow water with a safety boat, which is TRL 4 work.
 
 ![LaneSkiff build overview](docs/05-build-plan/overview.png)
 
@@ -89,15 +90,24 @@ The [prototype build plan](docs/05-build-plan.md) (LSK-BLD-001, plan, not yet bu
 >
 > Not for swiftwater, surf, open water or water flowing faster than a person can wade against.
 >
-> Do not exceed the rated load for the build material; the payload differs between build paths.
+> Do not exceed the rated load on the capacity plate: five persons or 375 kg for the first prototype, a paper rating until the load and swamp tests; the payload differs between build paths.
 >
 > Watch for submerged hazards, open drains, live electrical wires and contaminated water.
 >
 > The boarding step swings on a hinge: a 40 mm gap keeps fingers and feet clear through its swing, and it is proof-loaded before any boarding trial.
 >
-> When swamped, people stay seated and low; two people moving to one side can dip the gunwale.
+> If the boat is swamped, everyone stays in the boat, seated, low and centred, and the aft crew member moves amidships at once. This rule is on the capacity plate.
 >
 > This design is published as an open engineering reference. It is not certified equipment.
+
+## Operating notes
+
+These are paper notes for the first prototype; the TRL 4 trials confirm or change them.
+
+- **Rating.** Five persons or 375 kg in all, as on the capacity plate: a crew of two and three people rescued. Seat people on the benches, low and spread fore and aft.
+- **If swamped.** Nobody leaves the boat. Everyone sits low and centred, and the aft crew member moves amidships at once. With the stern quarter foam the boat stays afloat and nearly level even if the rule is not followed (160 mm of freeboard at the transom on paper), and with the rule followed the margin at the transom grows (215 mm on paper).
+- **Carrying.** Two people carry each half with the shoulder slings (about 25 kg each for the aft half and 19 kg for the forward half), or four carry the joined boat.
+- **Water.** Calm, slow floodwater only; never in moving water. Life jackets on everyone at all times.
 
 ## Repository layout
 

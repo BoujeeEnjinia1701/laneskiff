@@ -3,7 +3,7 @@ doc_id: LSK-PRC-001
 title: LaneSkiff design precis
 project: LaneSkiff
 doc_type: Precis
-version: "0.2"
+version: "0.3"
 status: Draft
 date: '2026-10-03'
 author: Amish Chadha
@@ -17,6 +17,10 @@ revisions:
   date: '2026-10-03'
   author: Amish Chadha
   change: Concept formulated (TRL 2) and made constructable (TRL 3); components with BOM numbers, key design choices, first-order numbers, material table, safety
+- version: "0.3"
+  date: '2026-10-03'
+  author: Amish Chadha
+  change: Round 2 requirement decisions by Amish (LSK-DDR-003); light timber specification, bottom 60 mm wider, five-person rating, stern quarter foam, swamped operating rule on the capacity plate, no fin drive in the first prototype
 ---
 
 # LaneSkiff design precis
@@ -29,13 +33,13 @@ A flat-bottomed flood rescue boat two people carry into flooded lanes, with a fl
 
 ## How it works
 
-LaneSkiff is a punt-form skiff 3.6 m long and 1.137 m wide over its rub strakes, 0.40 m deep, built in two rigid halves of 1.8 m. Each half is a closed plywood box with its own end panel and its own joint bulkhead, so each half floats on its own and the joint between them carries load but needs no seal. Eight M10 bolts join the halves through hardwood ring frames on the two bulkheads; one spanner does it, because the nuts are welded to plates on the aft frame.
+LaneSkiff is a punt-form skiff 3.6 m long and 1.197 m wide over its rub strakes, 0.40 m deep, built in two rigid halves of 1.8 m. Each half is a closed plywood box with its own end panel and its own joint bulkhead, so each half floats on its own and the joint between them carries load but needs no seal. Eight M10 bolts join the halves through softwood ring frames on the two bulkheads; one spanner does it, because the nuts are welded to plates on the aft frame.
 
 The bottom is flat for 2.7 m and rakes up to 200 mm at the bow, so the boat rides over kerbs and debris and can be poled in shallow water. The sides are flat plywood panels leaning out 8 degrees, which gives a wide waterline for stability and a narrow enough beam for lanes.
 
-Buoyancy follows the LevelHull layout: closed-cell foam modules run along both sides under the inwales, and a foam-filled bow box sits under a short bow deck. When the boat is swamped, the foam is outboard and high enough that the boat floats nearly level with its rated persons aboard.
+Buoyancy follows the LevelHull layout: closed-cell foam modules run along both sides under the inwales, and a foam-filled bow box sits under a short bow deck. Two smaller covered foam modules sit in the stern quarters, inboard of the aft benches against the transom end. When the boat is swamped, the foam is outboard and high enough that the boat floats nearly level with its five rated persons aboard; the crew then keeps everyone in the boat, low and centred, and the aft crew member moves amidships, as the capacity plate says.
 
-At the stern centre, a buoyant step float lies on the water behind the transom, hinged to a hardwood rail. A kick rung hangs 270 mm below it on webbing. A person in waist-deep water puts a foot on the rung, takes the two transom grab handles, kneels on the float and rolls over the transom. Boarding over the end of the boat heels it about 4 degrees, against about 16 degrees for the same person climbing over the side. Stop straps hold the float at 20 degrees below level, and a 40 mm gap between float and rail keeps fingers and feet clear through its whole swing.
+At the stern centre, a buoyant step float lies on the water behind the transom, hinged to a hardwood rail. A kick rung hangs 270 mm below it on webbing. A person in waist-deep water puts a foot on the rung, takes the two transom grab handles, kneels on the float and rolls over the transom. Boarding over the end of the boat heels it about 3 degrees, against about 13 degrees for the same person climbing over the side. Stop straps hold the float at 20 degrees below level, and a 40 mm gap between float and rail keeps fingers and feet clear through its whole swing.
 
 The crew poles the boat with a two-section push pole or paddles it. Eight carry handles, two at each end of each half, and two padded shoulder slings let people carry each half into a lane and join the halves at the water.
 
@@ -45,15 +49,15 @@ The crew poles the boat with a two-section push pole or paddles it. Eight carry 
 
 | BOM | Component | Role |
 | --- | --- | --- |
-| 1 | Bottom panels, 6 mm plywood (aft, forward flat, bow rake) | Flat bottom with a knuckle and bow rake; glass outside |
-| 2 | Side panels, 6 mm plywood (4) | Flat sides flared 8 deg; full length of each half |
+| 1 | Bottom panels, 6 mm okoume plywood (aft, forward flat, bow rake) | Flat bottom 1.06 m wide at the chine with a knuckle and bow rake; glass outside only |
+| 2 | Side panels, 4 mm okoume plywood (4) | Flat sides flared 8 deg; full length of each half |
 | 3, 4 | Stern transom (9 mm) and bow transom (9 mm) | Close the ends; the stern transom carries the step and grab handles |
 | 5 | Joint bulkheads, 6 mm plywood (2) | Close each half at the joint so each half floats alone |
-| 6 | Ring frames, hardwood 20 x 45 (3) | Stiffen the transom and the bulkheads and take the joint bolts |
-| 7 | Inwales, hardwood 20 x 40 (4) | Stiffen the sheer; hold handles, strakes and the bench modules |
+| 6 | Ring frames, softwood 20 x 45 (3) | Stiffen the transom and the bulkheads and take the joint bolts |
+| 7 | Inwales, softwood 20 x 40 (4) | Stiffen the sheer; hold handles, strakes and the bench modules |
 | 8 | Stringers (6) and knuckle floor | Stiffen the floor; take the skid screws; join the bottom at the knuckle |
 | 9 | Bench modules and bow box | Foam in sewn tarpaulin covers, strapped to bench rails; bow box wall and deck |
-| 10 | Buoyancy foam, closed-cell polyethylene | 0.49 m3 in the hull plus the step float core (LevelHull layout) |
+| 10 | Buoyancy foam, closed-cell polyethylene | 0.59 m3 in the hull plus the step float core (LevelHull layout) |
 | 11 | Joint bolts M10 x 80 with nut plates (8), alignment pins (2) | Join the halves with one spanner |
 | 12, 13 | Rub strakes and bottom skids, HDPE | Protect the hull from walls, kerbs and debris |
 | 14 | Stern step: hinge rail, backing block, float, strap hinges | Boarding platform on the water behind the transom |
@@ -61,8 +65,10 @@ The crew poles the boat with a two-section push pole or paddles it. Eight carry 
 | 17, 18 | Transom grab handles (2) and carry handles (8) | Handholds for boarding; carrying each half or the whole boat |
 | 19, 20, 21 | Push pole (two 1.5 m sections), paddles (2), bow eye and 10 m bow line | Propulsion and control in lanes; towing and holding at a doorway |
 | 22 to 28 | Epoxy, glass, consumables, topcoat, screws, shoulder slings | Build materials and carrying slings |
+| 29 | Stern quarter foam modules (2), covers and straps | 15 L each of extra foam aft for the swamped margin at the transom |
+| 30 | Capacity plate | Five persons or 375 kg, life jackets, calm water only, and the swamped operating rule |
 
-The optional fixed, forward-only fin drive is not part of the first prototype design; whether and how to add it is an open decision for Amish (LSK-DEC-001). The material substitution table is in the first-order numbers below.
+The optional fixed, forward-only fin drive is left out of the first prototype (Amish, 2026-10-03, LSK-DDR-003); an open fixed forward-only fin drive after the expired US6022249 is kept as a later, separate portfolio idea. The material substitution table is in the first-order numbers below.
 
 ![Exploded view](../media/exploded.png)
 
@@ -70,13 +76,16 @@ The optional fixed, forward-only fin drive is not part of the first prototype de
 
 ## Key design choices
 
-Decided under Amish's pre-approval of 2026-10-03 (LSK-DDR-001 and LSK-DDR-002):
+Decided under Amish's pre-approval of 2026-10-03 (LSK-DDR-001 and LSK-DDR-002) and his round 2 decisions of 2026-10-03 (LSK-DDR-003):
 
-- **Punt form, constant width.** A flat bottom 1.0 m wide at the chine for 2.7 m, raked to the bow, with flat flared sides: the widest waterline and lowest draft for a lane-width beam, from flat panels a local yard can cut.
+- **Light timber specification.** Okoume plywood, 4 mm sides, softwood framing and no glass inside the floor: 88 kg as carried, about 12 kg lighter, with less abrasion margin on the floor; each half carried by two people with the shoulder slings.
+- **Five-person rating.** Five persons, 375 kg, so the boat draws under 150 mm at its rated load.
+- **Punt form, constant width.** A flat bottom 1.06 m wide at the chine for 2.7 m, raked to the bow, with flat flared sides: the widest waterline and lowest draft for a lane-width beam, from flat panels a local yard can cut.
 - **Two closed halves.** Each half has its own bulkhead, so the joint needs no seal and a half that is holed or loose still floats. The halves are bolted, not hinged or folded (the Porta-Bote design-around).
 - **Plywood and epoxy first.** Stitch-and-glue is the most widely known small-boat method in coastal India and Bangladesh; aluminium and HDPE sheet paths are documented at concept level.
 - **LevelHull buoyancy layout.** Foam outboard along the sides and forward, never low on the floor; no lift is credited to the plywood or timber.
 - **Stern-centre boarding.** A float on the water and a kick rung below it, with transom handholds, after the expired US6932020B2 boarding platform.
+- **Swamped margin aft.** Two 15 L stern quarter foam modules, and the operating rule that the aft crew member moves amidships when swamped, printed on the capacity plate.
 - **Conservative safety choices.** Persons count at two thirds of their weight when swamped; the float swing is checked for pinch points; the step is proof-loaded before any boarding trial.
 
 ![Cutaway across the aft half](../media/cutaway.png)
@@ -87,27 +96,27 @@ Decided under Amish's pre-approval of 2026-10-03 (LSK-DDR-001 and LSK-DDR-002):
 
 From LSK-CAL-001 (`docs/04-calcs/01-sizing.md`); assumptions are stated there.
 
-*Table 2. First-order numbers, plywood and epoxy path.*
+*Table 2. First-order numbers, plywood and epoxy path, light timber specification.*
 
 | Quantity | Value |
 | --- | --- |
-| Length, beam over strakes, depth | 3.60 m, 1.137 m, 0.40 m |
-| Hull mass as carried (pole, paddles and line not counted) | 100 kg; aft half 56 kg, forward half 45 kg |
-| Rated load assessed | Six persons, 450 kg (4.5 times hull mass) |
-| Draft at rated load | 175 mm even keel; 162 mm at the transom, 187 mm at the forward end of the waterline |
-| Draft with a crew of two | 87 mm |
-| Heel boarding over the stern step; over the side | 4.3 deg; 15.6 deg |
-| Swamped with rated persons | Afloat, trim 2.1 deg stern down, freeboard 36 mm at the transom and 164 mm at the bow |
+| Length, beam over strakes, depth | 3.60 m, 1.197 m, 0.40 m |
+| Hull mass as carried (pole, paddles and line not counted) | 88 kg; aft half 50 kg, forward half 38 kg |
+| Rated load | Five persons, 375 kg (4.26 times hull mass) |
+| Draft at rated load | 143 mm even keel; 148 mm at the transom, 138 mm at the forward end of the waterline |
+| Draft with a crew of two | 79 mm |
+| Heel boarding over the stern step; over the side | 3.3 deg; 12.8 deg |
+| Swamped with rated persons | Afloat, trim 0.45 deg stern down, freeboard 160 mm at the transom with nobody moving; 215 mm with the aft crew amidships |
 | Joining the halves | About 6 min, one 17 mm spanner (estimate) |
-| Estimated cost of the constructable design | USD 1,922 against a value-engineering target of USD 1,500 (USD 422 over the target) |
+| Estimated cost of the constructable design | USD 2,098 against a value-engineering target of USD 1,500 (USD 598 over the target) |
 
 *Table 3. Material substitution table (hull mass and load carried at 150 mm draft, same hull form).*
 
 | Build path | Hull mass | Load at 150 mm draft | Load over hull mass |
 | --- | --- | --- | --- |
-| Plywood and epoxy (prototype) | 100 kg | 361 kg | 3.6 |
-| Aluminium 5052 sheet, 2.0 to 2.5 mm, welded or riveted | 98 kg | 364 kg | 3.7 |
-| HDPE or polypropylene sheet, 5 to 8 mm, plastic welded | 110 kg | 352 kg | 3.2 |
+| Okoume plywood and epoxy (prototype) | 88 kg | 401 kg | 4.6 |
+| Aluminium 5052 sheet, 2.0 to 2.5 mm, welded or riveted | 101 kg | 387 kg | 3.8 |
+| HDPE or polypropylene sheet, 5 to 8 mm, plastic welded | 111 kg | 377 kg | 3.4 |
 
 The aluminium and plastic rows are screening estimates from panel areas; the framing, foam and fittings are the same as the plywood boat.
 
@@ -132,10 +141,10 @@ From the preliminary patent, trademark and prior-art screen (not legal advice):
 >
 > - Crew and passengers wear life jackets at all times; crews need water rescue training under their own agency's rules.
 > - Not for swiftwater, surf, open water or water flowing faster than a person can wade against.
-> - Do not exceed the rated load for the build material; the rating of the first prototype is still to be decided, and the payload differs between build paths.
+> - Do not exceed the rated load on the capacity plate: five persons or 375 kg for the first prototype (a paper rating until the TRL 4 load test); the payload differs between build paths.
 > - Watch for submerged hazards, open drains, live electrical wires and contaminated water.
 > - The boarding step has a hinge and a swinging float: the 40 mm gap keeps fingers and feet clear through its 20 degree swing, and nobody holds the hinge edge while the step is folded or unfolded.
-> - When swamped, people stay seated and low; two people moving to one side can dip the gunwale (LSK-CAL-001, section 4).
+> - When swamped, everyone stays in the boat, seated, low and centred, and the aft crew member moves amidships at once; this rule is on the capacity plate (LSK-CAL-001, section 4).
 > - The step, stop straps, handles and bow eye are proof-loaded to twice their working load before any boarding trial, and the first swamp test is run in calm, shallow water with a safety boat (LSK-BLD-001, safety stops).
 
 ## Open questions

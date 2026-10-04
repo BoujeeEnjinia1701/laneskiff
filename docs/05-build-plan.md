@@ -3,7 +3,7 @@ doc_id: LSK-BLD-001
 title: LaneSkiff prototype build plan
 project: LaneSkiff
 doc_type: Build plan
-version: "0.1"
+version: "0.2"
 status: Draft
 date: '2026-10-03'
 author: Amish Chadha
@@ -13,6 +13,10 @@ revisions:
   date: '2026-10-03'
   author: Amish Chadha
   change: First build plan; design made constructable (LSK-DDR-002)
+- version: "0.2"
+  date: '2026-10-03'
+  author: Amish Chadha
+  change: Round 2 requirement decisions (LSK-DDR-003); okoume plywood with 4 mm sides, softwood framing, no glass inside the floor, bottom 60 mm wider, stern quarter foam modules, capacity plate with the five-person rating and the swamped operating rule
 ---
 
 # LaneSkiff prototype build plan
@@ -27,7 +31,7 @@ revisions:
 
 *Figure 1. Every component in build order, pulled apart. Both halves are shown in place along the boat.*
 
-A flat-bottomed skiff 3.6 m long and 1.137 m wide over its rub strakes, in two closed halves of 1.8 m that bolt together. Each half is stitched and glued from flat 6 mm plywood panels, framed with hardwood, glassed outside, and fitted with covered foam modules along both sides. The aft half carries a floating boarding step behind its transom; the forward half has a foam-filled bow box under a short deck. Fourteen components are made (the plywood panels, hardwood frames, inwales and stringers, the bench modules, the bow box, the step rail, float and kick rung, and the push pole); the rest are bought (foam sheet, HDPE strip, bolts and nut plates, hinges, webbing, handles, paddles, rope). The parts cost about USD 1,920 from the bill of materials.
+A flat-bottomed skiff 3.6 m long and 1.197 m wide over its rub strakes, in two closed halves of 1.8 m that bolt together, rated for five persons. Each half is stitched and glued from flat okoume plywood panels (6 mm bottom, 4 mm sides), framed with softwood, glassed outside only, and fitted with covered foam modules along both sides; the aft half has two more covered foam modules in its stern quarters. The aft half carries a floating boarding step behind its transom; the forward half has a foam-filled bow box under a short deck. Fourteen components are made (the plywood panels, hardwood frames, inwales and stringers, the bench modules, the bow box, the step rail, float and kick rung, and the push pole); the rest are bought (foam sheet, HDPE strip, bolts and nut plates, hinges, webbing, handles, paddles, rope). A capacity plate on the inside of the transom states the rating and what to do if the boat is swamped. The parts cost about USD 2,100 from the bill of materials.
 
 ## 2. What changed to make it buildable
 
@@ -36,13 +40,13 @@ A flat-bottomed skiff 3.6 m long and 1.137 m wide over its rub strakes, in two c
 | Component | The concept had | The buildable design has | Why |
 | --- | --- | --- | --- |
 | Hull | A hull shape | Three flat bottom panels and four flat side panels, stitched and glued with epoxy fillets and glass tape | Every panel is cut flat from a standard sheet |
-| The split | One mid bulkhead | Two bulkheads, one closing each half, each with a hardwood ring frame | Each half floats alone; the joint needs no seal |
+| The split | One mid bulkhead | Two bulkheads, one closing each half, each with a softwood ring frame | Each half floats alone; the joint needs no seal |
 | The joint | Bolts | Eight stainless M10 bolts from the forward side into nut plates on the aft frame, and two alignment pins | One spanner joins the halves |
-| Side buoyancy | Blocks under benches | Foam modules in sewn tarpaulin covers, held under the inwale and strapped to a hardwood rail on the floor | Lighter than plywood boxes; the straps hold the module down when swamped |
+| Side buoyancy | Blocks under benches | Foam modules in sewn tarpaulin covers, held under the inwale and strapped to a timber rail on the floor | Lighter than plywood boxes; the straps hold the module down when swamped |
 | Bow buoyancy | Buoyancy in the bow | A bow box with a plywood wall and deck, filled with foam | Foam forward and high; a dry deck for the bow line |
-| Floor | A floor | Three hardwood stringers per half and a knuckle floor | Short floor spans; the skids screw into hardwood |
+| Floor | A floor | Three softwood stringers per half and a knuckle floor | Short floor spans; the skids screw into the stringers |
 | Stern step | A hinged buoyant step | A float on strap hinges behind a hardwood rail, a 40 mm gap, stop straps and a kick rung | Nothing can be trapped as it swings; the straps take a kneeling person |
-| Strakes, skids, handles | Named only | HDPE strip screwed into hardwood; bought handles bolted through the inwales and transom frame; shoulder slings | Every fixing lands in hardwood |
+| Strakes, skids, handles | Named only | HDPE strip screwed into the framing; bought handles bolted through the inwales and transom frame; shoulder slings | Every fixing lands in solid timber |
 | Push pole | A pole | Two 1.5 m sections with a joining sleeve | Stows inside one half |
 
 ![The two halves bolted together](05-build-plan/joint-04.png)
@@ -57,7 +61,7 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 
 ![Making sketch: bottom panels](../cad/drawings/LSK-DWG-101.png)
 
-**What it is and what it is made from.** Three panels of 6 mm marine plywood: the aft bottom (1,800 x 988 mm), the forward flat bottom (900 x 988 mm), and the bow rake panel (921 mm long, 1,000 mm wide at its aft edge widening to 1,056 mm at the bow, because the sides flare).
+**What it is and what it is made from.** Three panels of 6 mm okoume marine plywood: the aft bottom (1,800 x 1,052 mm), the forward flat bottom (900 x 1,052 mm), and the bow rake panel (921 mm long, 1,052 mm wide at its aft edge widening to 1,110 mm at the bow, because the sides flare). The floor is glassed outside only; there is no glass on the inside of the floor, so keep grit off it and recoat worn patches.
 
 **How to make it.**
 
@@ -79,13 +83,13 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 
 ![Making sketch: side panels](../cad/drawings/LSK-DWG-102.png)
 
-**What it is and what it is made from.** Four panels of 6 mm marine plywood, 1,800 mm long. The two aft sides are 400 mm high rectangles. The two forward sides are 400 mm high at their aft end, with the bottom edge straight for 900 mm and then rising to 200 mm at the bow end; make them as a mirrored pair.
+**What it is and what it is made from.** Four panels of 4 mm okoume marine plywood, 1,800 mm long. The two aft sides are 400 mm high rectangles. The two forward sides are 400 mm high at their aft end, with the bottom edge straight for 900 mm and then rising to 200 mm at the bow end; make them as a mirrored pair.
 
 **How to make it.**
 
 1. Cut both aft sides from one sheet and both forward sides from another, two to a sheet.
 2. Mark the inwale line 40 mm below the top edge on the inside face.
-3. Drill stitching holes 12 mm in from the bottom and end edges every 150 mm.
+3. Drill stitching holes 12 mm in from the bottom and end edges every 150 mm; in 4 mm plywood pull the stitches only snug, so the wire does not cut the edge.
 4. Seal both faces.
 
 **How it fits the parts next to it.** The panels lean out 8 degrees from vertical. Their ends are flush with the outer faces of the transom, bulkhead and bow transom. They stay flat; there is no bending.
@@ -96,7 +100,7 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 
 ![Making sketch: stern transom](../cad/drawings/LSK-DWG-103.png)
 
-**What it is and what it is made from.** 9 mm marine plywood, a trapezoid 394 mm high, about 988 mm wide at the bottom and 1,099 mm at the top, with both side edges bevelled 8 degrees.
+**What it is and what it is made from.** 9 mm okoume marine plywood, a trapezoid 394 mm high, about 1,054 mm wide at the bottom and 1,164 mm at the top, with both side edges bevelled 8 degrees.
 
 **How to make it.**
 
@@ -116,7 +120,7 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 
 ![Making sketch: bow transom](../cad/drawings/LSK-DWG-104.png)
 
-**What it is and what it is made from.** 9 mm marine plywood, about 1,120 mm wide at the bottom and 1,128 mm at the top, about 191 mm high, with its bottom edge bevelled 12.5 degrees to the rake and its sides bevelled 8 degrees.
+**What it is and what it is made from.** 9 mm okoume marine plywood, about 1,109 mm wide at the bottom and 1,164 mm at the top, about 196 mm high, with its bottom edge bevelled 12.5 degrees to the rake and its sides bevelled 8 degrees.
 
 **How to make it.** Cut and bevel; drill two 9 mm holes for the bow eye, 330 mm above the line of the hull bottom and 25 mm each side of the centreline; seal.
 
@@ -128,7 +132,7 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 
 ![Making sketch: joint bulkheads](../cad/drawings/LSK-DWG-105.png)
 
-**What it is and what it is made from.** Two panels of 6 mm marine plywood, the same trapezoid as the stern transom.
+**What it is and what it is made from.** Two panels of 6 mm okoume marine plywood, the same trapezoid as the stern transom.
 
 **How to make it.** Cut both from one pattern; seal. Drill the bolt and pin holes later, through bulkhead and ring frame together, with both halves clamped face to face (section 3.6).
 
@@ -144,7 +148,7 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 
 ![Making sketch: ring frames](../cad/drawings/LSK-DWG-106.png)
 
-**What it is and what it is made from.** Three rings of durable hardwood 20 x 45 mm: one inside the stern transom and one on each joint bulkhead. Each ring is four members (bottom, two sides at 8 degrees, top), half-lapped at the corners, following the inside of the hull with a 45 mm wide face.
+**What it is and what it is made from.** Three rings of treated softwood 20 x 45 mm: one inside the stern transom and one on each joint bulkhead. Each ring is four members (bottom, two sides at 8 degrees, top), half-lapped at the corners, following the inside of the hull with a 45 mm wide face.
 
 **How to make it.**
 
@@ -161,7 +165,7 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 
 ![Making sketch: inwales](../cad/drawings/LSK-DWG-107.png)
 
-**What it is and what it is made from.** Four lengths of durable hardwood 20 x 40 mm: aft inwales 1,739 mm, forward inwales 1,762 mm.
+**What it is and what it is made from.** Four lengths of treated softwood 20 x 40 mm: aft inwales 1,739 mm, forward inwales 1,762 mm.
 
 **How to make it.** Bevel the top edge 8 degrees; glue to the inside of the side panel along the inwale line, screwing from outside every 150 mm; ends butt the ring frames (and the bow transom forward).
 
@@ -173,7 +177,7 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 
 ![Making sketch: stringers and knuckle floor](../cad/drawings/LSK-DWG-108.png)
 
-**What it is and what it is made from.** Six hardwood stringers 40 x 20 mm (three per half: on the centreline and 150 mm each side; 1,739 mm long aft, 851 mm forward) and a knuckle floor 40 mm long and 45 mm high across the forward half at the knuckle, its underside cut to the two bottom slopes.
+**What it is and what it is made from.** Six treated softwood stringers 40 x 20 mm (three per half: on the centreline and 150 mm each side; 1,739 mm long aft, 851 mm forward) and a knuckle floor 40 mm long and 45 mm high across the forward half at the knuckle, its underside cut to the two bottom slopes.
 
 **How to make it.** Glue the stringers flat to the floor on their marked lines, ends butted to the ring frames and the knuckle floor. Glue and screw the knuckle floor across both bottom panels at the knuckle.
 
@@ -189,7 +193,7 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 
 ![Making sketch: bench module](../cad/drawings/LSK-DWG-109.png)
 
-**What it is and what it is made from.** Four modules, one each side of each half: a core of closed-cell polyethylene foam in 50 mm layers, stacked 350 mm high, with its outboard edge bevelled 8 degrees to lie on the side (160 to 210 mm wide, 1,735 mm long aft, 847 mm forward); a sewn sleeve of PVC-coated polyester tarpaulin with laced ends, as for the LevelHull modules; a hardwood bench rail 40 x 20 mm on the floor along the module's inboard foot, 330 mm from the centreline; and webbing straps (three per aft module, two per forward module).
+**What it is and what it is made from.** Four modules, one each side of each half: a core of closed-cell polyethylene foam in 50 mm layers, stacked 350 mm high, with its outboard edge bevelled 8 degrees to lie on the side (193 to 242 mm wide, 1,735 mm long aft, 847 mm forward); a sewn sleeve of PVC-coated polyester tarpaulin with laced ends, as for the LevelHull modules; a softwood bench rail 40 x 20 mm on the floor along the module's inboard foot, 330 mm from the centreline; and webbing straps (three per aft module, two per forward module).
 
 **How to make it.**
 
@@ -204,13 +208,15 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 
 *Figure 7. Bench module tight under the inwale, strapped to the inwale and the bench rail.*
 
-**Check before moving on.** The module cannot be lifted by hand at any strap.
+**Stern quarter modules (make 2).** One each side of the aft half, inboard of the aft bench module at the transom end: a foam core of 50 mm layers 205 x 222 x 330 mm (15 L), in a sewn tarpaulin cover, outside 209 mm along the boat, 226 mm across and 334 mm high. It stands on the side stringer and the bench rail, 40 mm forward of the transom so it clears the hinge rail bolt nuts, against the bench module's inboard face, and its top is level with the bench top. Two 50 mm webbing straps hold each one: screwed to the floor with a stainless washer at its inboard foot, up its inboard face, over its top and the bench top, and screwed to the inwale's inner face like the bench straps. The standing crew member's place at the pole, 400 mm forward of the transom, stays clear.
+
+**Check before moving on.** No module can be lifted by hand at any strap.
 
 ### 3.10 Bow box
 
 ![Making sketch: bow box](../cad/drawings/LSK-DWG-110.png)
 
-**What it is and what it is made from.** A 6 mm plywood wall standing 3.0 m forward of the transom, cut to the rake and notched round the inwales; a 6 mm deck 591 mm long and about 1,060 mm wide; foam layers filling the box; and a hardwood pad 20 x 120 x 80 mm for the bow eye.
+**What it is and what it is made from.** A 6 mm plywood wall standing 3.0 m forward of the transom, cut to the rake and notched round the inwales; a 6 mm deck 591 mm long and about 1,124 mm wide; foam layers filling the box; and a hardwood pad 20 x 120 x 80 mm for the bow eye.
 
 **How to make it.**
 
@@ -291,7 +297,10 @@ Make every plywood panel first, seal it with epoxy on both faces, and dry-fit be
 - **Hinges and pad eyes:** two heavy stainless strap hinges about 100 mm wide with 6 mm pins; four stainless pad eyes.
 - **Webbing:** 25 mm polyester for the stop and rung straps, 50 mm for the bench straps and slings.
 - **Handles:** two stainless tube grab handles about 250 mm long for the transom; eight grab handles about 200 mm long for the inwales, each with two M6 bolts.
-- **Paddles, bow line and slings:** two 1.4 m paddles, 10 m of 10 mm polyester rope, two padded slings with snap hooks.
+- **Paddles, bow line and slings:** two 1.4 m paddles, 10 m of 10 mm polyester rope, two padded slings with snap hooks; two carriers take each half with the slings.
+- **Capacity plate:** an engraved or etched aluminium plate 150 x 100 mm, screwed to the inside face of the stern transom above the backing block, between the stern quarter modules, where the crew sees it. Its text:
+
+  > LANESKIFF. Maximum 5 persons or 375 kg. Life jackets on at all times. Calm, slow water only; never in moving water. IF SWAMPED: stay in the boat, sit low and centred, and the aft crew member moves amidships at once. Open engineering reference, not certified.
 
 ## 4. Putting it together
 
@@ -351,11 +360,11 @@ Ring frame, inwales, stringers and bench rails as on the aft half; then the bow 
 
 Finish the forward half as in steps 6, 10 and 11.
 
-### Step 10: strap in the aft bench modules
+### Step 10: strap in the aft bench and quarter modules
 
 ![Step 10](05-build-plan/step-10.png)
 
-Slide each module under the inwale, against the side; screw each strap to the inwale and the bench rail, pulled snug.
+Slide each module under the inwale, against the side; screw each strap to the inwale and the bench rail, pulled snug. Then set each stern quarter module on the side stringer and bench rail against its bench module, and screw its two straps to the floor and the inwale. Screw the capacity plate to the inside of the transom.
 
 ### Step 11: fit the grab and carry handles
 
@@ -408,11 +417,11 @@ These are listed here and recorded in a TRL 4 test report.
 | Check | Requirement | How | Pass when |
 | --- | --- | --- | --- |
 | Beam | R4 | Tape over the rub strakes; carry through a 1.3 m gate | Fits the gate without scraping |
-| Carry mass | R1 | Weigh each half on a hanging scale | Recorded against LSK-CAL-001 (56 and 45 kg expected) |
+| Carry mass | R1 | Weigh each half on a hanging scale | Recorded against LSK-CAL-001 (50 and 38 kg expected) |
 | Joining the halves | R7 | Two people, one spanner, timed from halves on the ground to eight bolts tight | Joined, and within the R7 time |
 | Each half alone | Safety | Float each half on its own in calm, shallow water | Floats upright, no leak at the bulkhead |
-| Load and draft | R2, R3 | Water ballast in containers placed as the rated persons, in calm water | Drafts recorded at the transom and bow; no water over the gunwale |
-| Swamp | R5 | Fill with water, ballast for the rated persons at two thirds, following the ABYC H-8 procedure in a pool | Floats, trim and freeboard recorded at the transom and bow |
+| Load and draft | R2, R3 | Water ballast in containers placed as the five rated persons (375 kg), in calm water | Draft 150 mm or less at the transom and bow; no water over the gunwale |
+| Swamp | R5 | Fill with water, ballast for the five rated persons at two thirds, following the ABYC H-8 procedure in a pool; first with the aft crew's ballast in place, then moved amidships | Floats approximately level; trim and freeboard recorded at the transom and bow in both cases |
 | Boarding | R6 | Several volunteers of different builds board over the stern step from waist-deep water, inclinometer on the hull | Heel recorded; every volunteer boards unaided |
 | Step proof load | R6, safety | Twice the working load on the float aft edge at its stop (CalRig) | No damage, no hinge or strap movement |
 
@@ -424,7 +433,8 @@ Work stops at each point below until what is listed is true.
 - **Before the first time on the water:** each half floated alone without a leak; the bow eye pulled to twice the towing load.
 - **Before any boarding trial:** the step hinges, stop straps and kick rung proof-loaded to twice the working load (an 80 kg person kneeling on the float's aft edge with a factor of two); the hinge gap checked at 40 mm with nothing closing below 25 mm through the swing.
 - **Before any load or swamp trial:** calm, shallow water no deeper than chest height, no current; a safety boat or bank team with a throw line; every person in a life jacket and briefed; ballast in place of people for the first swamp test.
-- **Before any rescue use:** the TRL 4 trials passed, the rating decided by Amish and marked on the transom, and the crew trained under its own agency's rules. Never in moving water.
+- **Before any person is carried:** the capacity plate is on the transom with the five-person rating and the swamped operating rule, and every crew member has read it.
+- **Before any rescue use:** the TRL 4 trials passed and the five-person rating on the capacity plate confirmed by the load and swamp tests, and the crew trained under its own agency's rules, including the swamped rule. Never in moving water.
 
 ## 7. Tools, skills and workspace
 
@@ -440,4 +450,4 @@ Work stops at each point below until what is listed is true.
 - Calculations: `docs/04-calcs/01-sizing.md` (LSK-CAL-001), `docs/04-calcs/sizing.py`, `docs/04-calcs/results.csv`.
 - Bill of materials: `bom/bom.csv`.
 - Pictures: `cad/src/build_plan_media.py`.
-- Design changes: `docs/decisions/0002-design-for-construction.md` (LSK-DDR-002).
+- Design changes: `docs/decisions/0002-design-for-construction.md` (LSK-DDR-002) and `docs/decisions/0003-requirement-decisions-round2.md` (LSK-DDR-003).
